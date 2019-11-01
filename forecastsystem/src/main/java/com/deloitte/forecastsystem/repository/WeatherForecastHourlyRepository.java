@@ -41,6 +41,6 @@ public interface WeatherForecastHourlyRepository extends CrudRepository<WeatherF
     public List<WeatherForecastHourly> findByDayForecats(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") Date p_Day_forecast);    
     
     @Query("SELECT AVG(wfh.temperature), MIN(wfh.temperature), MAX(wfh.temperature), AVG(wfh.apparentTemperature), MIN(wfh.apparentTemperature), MAX(wfh.apparentTemperature) FROM WeatherForecastHourly wfh WHERE weatherForecast=:p_weatherForecast AND dayForecast=:p_Day_forecast")
-    public WeatherForecastRecord findByDayForecatsRecord(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") Date p_Day_forecast);       
+    public Double[] findByDayForecatsRecord(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") Date p_Day_forecast);       
     
 }

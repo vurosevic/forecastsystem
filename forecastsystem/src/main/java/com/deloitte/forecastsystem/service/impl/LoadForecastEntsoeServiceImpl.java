@@ -68,7 +68,7 @@ public class LoadForecastEntsoeServiceImpl implements LoadForecastEntsoeService 
     }
 
 	@Override
-	public LoadEntsoeForecastRecord findByDateForecastRecord(Date p_dateOfForecast, Country p_country,
+	public Object[] findByDateForecastRecord(Date p_dateOfForecast, Country p_country,
 			Date p_loadDate) {
 		// TODO Auto-generated method stub
 		return loadForecastEntsoeDAO.findByDateForecastRecord(p_dateOfForecast, p_country, p_loadDate);

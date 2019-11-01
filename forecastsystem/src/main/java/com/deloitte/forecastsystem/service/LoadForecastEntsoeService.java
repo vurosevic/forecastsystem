@@ -32,6 +32,6 @@ public interface LoadForecastEntsoeService {
     public List<LoadForecastEntsoe> findByDateForecastCountryLoadDate(Date p_dateOfForecast, Country p_country, Date p_loadDate); 
 //    public Integer findByDateForecastCountryHourAvg(Date p_dateOfForecast, Country p_country, Date p_loadDate, Integer p_loadHour); 
     
-    public LoadEntsoeForecastRecord findByDateForecastRecord(Date p_dateOfForecast, Country p_country, Date p_loadDate);     
+    public Object[] findByDateForecastRecord(Date p_dateOfForecast, Country p_country, Date p_loadDate);     
     
 }

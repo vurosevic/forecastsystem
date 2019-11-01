@@ -3,6 +3,7 @@ package com.deloitte.forecastsystem.loadforecast.datavector;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,24 +110,25 @@ public class DataVectorAvgLoad implements DataVector {
 		System.out.println("DateYesterday: " + dateYesterday);
 		System.out.println("DateToday: " + dateToday);		
 		
-		List<WeatherForecast> weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
-		WeatherForecastRecord weatherForecastRecord = weatherForecastHourlyService.findByDayForecatsRecord(weatherForecastList.get(0), dateToday);
+	//	List<WeatherForecast> weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
+		Optional<WeatherForecast> weatherForecastList = weatherForecastService.findById(142L);
+		Double[] weatherForecastRecord = weatherForecastHourlyService.findByDayForecatsRecord(weatherForecastList.get(), dateToday);
 		
-		LoadEntsoeForecastRecord loadEntsoeForecastRecord = loadForecastEntsoeService.findByDateForecastRecord(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday); 
+		Object[] loadEntsoeForecastRecord = loadForecastEntsoeService.findByDateForecastRecord(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday); 
 		
 		double[] res = preparedDataLoadAvgService.findByDate(this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))).get(0).preparedVectorToday();
 		
-		res[46] = loadService.getRealMinLoadByDate(dateYesterday, countryService.findById(Long.valueOf(this.country.ordinal())));
-		res[47] = loadService.getRealMaxLoadByDate(dateYesterday, countryService.findById(Long.valueOf(this.country.ordinal())));
-		res[48] = weatherForecastRecord.getAvgTemperature();
-		res[49] = weatherForecastRecord.getMinTemperature();
-		res[50] = weatherForecastRecord.getMaxTemperature();
-		res[51] = weatherForecastRecord.getAvgFeelslike();
-		res[52] = weatherForecastRecord.getMinFeelslike();
-		res[53] = weatherForecastRecord.getMaxFeelslike();
-		res[54] = loadEntsoeForecastRecord.getAvgLoadForecastEntsoe();
-		res[55] = loadEntsoeForecastRecord.getMinLoadForecastEntsoe();
-		res[56] = loadEntsoeForecastRecord.getMaxLoadForecastentsoe();
+		res[46] = loadService.getRealMinLoadByDate(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)));
+		res[47] = loadService.getRealMaxLoadByDate(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)));
+		res[48] = weatherForecastRecord[0];
+		res[49] = weatherForecastRecord[1];
+		res[50] = weatherForecastRecord[2];
+		res[51] = weatherForecastRecord[3];
+		res[52] = weatherForecastRecord[4];
+		res[53] = weatherForecastRecord[5];
+		res[54] = (double) loadEntsoeForecastRecord[0];
+		res[55] = (double) loadEntsoeForecastRecord[1];
+		res[56] = (double) loadEntsoeForecastRecord[3];
 		
 		return res;	
 	}	

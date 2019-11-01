@@ -28,6 +28,6 @@ public interface WeatherForecastHourlyService {
     public void delete(WeatherForecastHourly t);
     public List<WeatherForecastHourly> findByDate(WeatherForecast p_weatherForecast);     
     public List<WeatherForecastHourly> findByDayForecats(WeatherForecast p_weatherForecast, Date p_Day_forecast);    
-    public WeatherForecastRecord findByDayForecatsRecord(WeatherForecast p_weatherForecast, Date p_Day_forecast);       
+    public Double[] findByDayForecatsRecord(WeatherForecast p_weatherForecast, Date p_Day_forecast);       
     
 }

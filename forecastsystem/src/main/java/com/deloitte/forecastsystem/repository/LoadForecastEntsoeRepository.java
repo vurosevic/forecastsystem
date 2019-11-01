@@ -51,7 +51,7 @@ public interface LoadForecastEntsoeRepository extends CrudRepository<LoadForecas
                                                                       @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate);     
 
     @Query("SELECT AVG(lfe.loadForecastEntsoe), MIN(lfe.loadForecastEntsoe), MAX(lfe.loadForecastEntsoe) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate")
-    public LoadEntsoeForecastRecord findByDateForecastRecord(@Param("p_dateOfForecast") Date p_dateOfForecast,
+    public Object[] findByDateForecastRecord(@Param("p_dateOfForecast") Date p_dateOfForecast,
                                                     @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate);     
          
 }

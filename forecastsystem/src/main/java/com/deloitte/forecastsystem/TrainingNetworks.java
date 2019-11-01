@@ -2,6 +2,7 @@ package com.deloitte.forecastsystem;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import com.deloitte.forecastsystem.loadforecast.config.CountriesEnum;
@@ -13,6 +14,7 @@ import com.deloitte.forecastsystem.loadforecast.datavector.DataVectorAvgLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastAvgLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastHoursLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastSumLoad;
+import com.deloitte.forecastsystem.model.WeatherForecast;
 
 public class TrainingNetworks {
 
@@ -117,7 +119,9 @@ public class TrainingNetworks {
     	  System.out.println("Net " + sf.getNet(i).getCountry() + ". MAPE=" + sf.getMapeForNet(i));
       }		
      
-//      System.out.println("Elapsed time: " + diff + " min.");        
+//      System.out.println("Elapsed time: " + diff + " min.");  
+     
+      
       System.out.println("End.");			
 		    
       
