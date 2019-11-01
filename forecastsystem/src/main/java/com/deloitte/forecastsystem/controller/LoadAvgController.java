@@ -51,11 +51,28 @@ public class LoadAvgController {
 		dataVector.setGodina(o.getLacyear()); 	
 		
 		Double result = nn.predict(dataVector.getPreparedData());
-		
-		Double result2 = nn.predict(dataVector.getPreparedDataToday());
-    	
+   	
         return ResponseEntity.status(HttpStatus.OK).body(result); 
-    }   	
+    } 
+    
+    @RequestMapping(value = "/predicttoday", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)        
+    public @ResponseBody Object predictToday(@RequestBody LoadAvgComm o) { 
+    	
+    	System.out.println("PREDICT TODAY 'AVG LOAD' COMMAND");    	
+    	System.out.println(o);   
+    	
+		MlpNetAvgLoad nn = systemForecast.getNetByCountry(CountriesEnum.values()[o.getLaccountry()-1]);
+		nn.loadLastStateMlpNet();    	
+		
+		dataVector.setCountry(CountriesEnum.values()[o.getLaccountry()-1]);
+		dataVector.setDan(o.getLacday());
+		dataVector.setMesec(o.getLacmonth());
+		dataVector.setGodina(o.getLacyear()); 	
+		
+		Double result = nn.predict(dataVector.getPreparedDataToday());
+		  	
+        return ResponseEntity.status(HttpStatus.OK).body(result); 
+    }     
     
     @RequestMapping(value = "/predictmonth", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)        
     public @ResponseBody Object predictMonth(@RequestBody LoadAvgComm o) { 

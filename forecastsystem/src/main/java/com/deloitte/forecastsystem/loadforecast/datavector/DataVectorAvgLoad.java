@@ -100,11 +100,14 @@ public class DataVectorAvgLoad implements DataVector {
 	
 	public double[] getPreparedDataToday() {	
 		
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));
+		Calendar cal = Calendar.getInstance();
 		cal.set(this.godina, this.mesec-1, this.dan);
 		Date dateYesterday = cal.getTime();
 		cal.set(this.godina, this.mesec-1, this.dan+1);
 		Date dateToday = cal.getTime();		
+		
+		System.out.println("DateYesterday: " + dateYesterday);
+		System.out.println("DateToday: " + dateToday);		
 		
 		List<WeatherForecast> weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
 		WeatherForecastRecord weatherForecastRecord = weatherForecastHourlyService.findByDayForecatsRecord(weatherForecastList.get(0), dateToday);
