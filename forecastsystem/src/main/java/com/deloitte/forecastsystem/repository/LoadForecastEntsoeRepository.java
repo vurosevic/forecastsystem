@@ -8,7 +8,11 @@ package com.deloitte.forecastsystem.repository;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.persistence.TemporalType;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -50,8 +54,8 @@ public interface LoadForecastEntsoeRepository extends CrudRepository<LoadForecas
     public List<LoadForecastEntsoe> findByDateForecastCountryLoadDate(@Param("p_dateOfForecast") Date p_dateOfForecast,
                                                                       @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate);     
 
-    @Query("SELECT AVG(lfe.loadForecastEntsoe), MIN(lfe.loadForecastEntsoe), MAX(lfe.loadForecastEntsoe) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate")
-    public Object[] findByDateForecastRecord(@Param("p_dateOfForecast") Date p_dateOfForecast,
-                                                    @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate);     
+    @Query("SELECT new com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord(AVG(lfe.loadForecastEntsoe), MIN(lfe.loadForecastEntsoe), MAX(lfe.loadForecastEntsoe)) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate")
+    public LoadEntsoeForecastRecord findByDateForecastRecord(@Param("p_dateOfForecast") @Temporal(TemporalType.DATE) Date p_dateOfForecast,
+                                                    @Param("p_country") Country p_country, @Param("p_loadDate")  @Temporal(TemporalType.DATE)  Date p_loadDate);     
          
 }

@@ -9,6 +9,17 @@ public class WeatherForecastRecord {
 	Double minFeelslike;
 	Double maxFeelslike;
 	
+	public WeatherForecastRecord(Double avgTemperature,	Double minTemperature, Double maxTemperature,
+								 Double avgFeelslike, Double minFeelslike, Double maxFeelslike) {
+		// TODO Auto-generated constructor stub
+		this.avgTemperature = avgTemperature;
+		this.minTemperature = minTemperature;
+		this.maxTemperature = maxTemperature;
+		this.avgFeelslike = avgFeelslike;
+		this.minFeelslike = minFeelslike;
+		this.maxFeelslike = maxFeelslike;
+	}
+	
 	public Double getAvgTemperature() {
 		return avgTemperature;
 	}

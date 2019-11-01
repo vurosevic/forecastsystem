@@ -9,7 +9,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.TemporalType;
+
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.Temporal;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -39,6 +42,6 @@ public interface WeatherRepository extends CrudRepository<Weather, Long>{
     public <S extends Weather> S save(S s);
    
     @Query("SELECT wf FROM WeatherForecast wf WHERE forecastTime=:p_forecastTime AND country=:p_country")
-    public WeatherForecast findByDate(@Param("p_forecastTime") Date p_forecastTime, @Param("p_country") Country p_country);    
+    public WeatherForecast findByDate(@Param("p_forecastTime") @Temporal(TemporalType.DATE) Date p_forecastTime, @Param("p_country") Country p_country);    
     
 }

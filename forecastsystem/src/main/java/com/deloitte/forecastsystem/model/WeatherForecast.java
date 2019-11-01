@@ -43,8 +43,8 @@ public class WeatherForecast implements Serializable {
     @ManyToOne
     @JoinColumn(name = "Country_fk")
     private Country country;
-    
-    @Column(name = "Forecast_time")
+        
+    @Column(name = "Forecast_time", columnDefinition = "DATE")
     private Date forecastTime;
 
     /**

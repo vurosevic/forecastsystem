@@ -3,31 +3,42 @@ package com.deloitte.forecastsystem.model.communication;
 public class LoadEntsoeForecastRecord {
 	
 	Double avgLoadForecastEntsoe;
-	Double minLoadForecastEntsoe;
-	Double maxLoadForecastentsoe;
+	Integer minLoadForecastEntsoe;
+	Integer maxLoadForecastentsoe;
 	
+	public LoadEntsoeForecastRecord(double avgLoadForecastEntsoe, int minLoadForecastEntsoe, int maxLoadForecastentsoe) {
+		// TODO Auto-generated constructor stub
+		this.avgLoadForecastEntsoe = avgLoadForecastEntsoe;
+		this.minLoadForecastEntsoe = minLoadForecastEntsoe;
+		this.maxLoadForecastentsoe = maxLoadForecastentsoe;
+	}
+
 	public Double getAvgLoadForecastEntsoe() {
 		return avgLoadForecastEntsoe;
 	}
-	
+
 	public void setAvgLoadForecastEntsoe(Double avgLoadForecastEntsoe) {
 		this.avgLoadForecastEntsoe = avgLoadForecastEntsoe;
 	}
-	
-	public Double getMinLoadForecastEntsoe() {
+
+	public Integer getMinLoadForecastEntsoe() {
 		return minLoadForecastEntsoe;
 	}
-	
-	public void setMinLoadForecastEntsoe(Double minLoadForecastEntsoe) {
+
+	public void setMinLoadForecastEntsoe(Integer minLoadForecastEntsoe) {
 		this.minLoadForecastEntsoe = minLoadForecastEntsoe;
 	}
-	
-	public Double getMaxLoadForecastentsoe() {
+
+	public Integer getMaxLoadForecastentsoe() {
 		return maxLoadForecastentsoe;
 	}
-	
-	public void setMaxLoadForecastentsoe(Double maxLoadForecastentsoe) {
+
+	public void setMaxLoadForecastentsoe(Integer maxLoadForecastentsoe) {
 		this.maxLoadForecastentsoe = maxLoadForecastentsoe;
 	}
+
+
+	
+
 
 }

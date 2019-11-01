@@ -59,7 +59,7 @@ public class WeatherForecastHourlyServiceImpl implements WeatherForecastHourlySe
 	}
 
 	@Override
-	public Double[] findByDayForecatsRecord(WeatherForecast p_weatherForecast, Date p_Day_forecast) {
+	public WeatherForecastRecord findByDayForecatsRecord(WeatherForecast p_weatherForecast, Date p_Day_forecast) {
 		// TODO Auto-generated method stub
 		return weatherForecastHourlyDAO.findByDayForecatsRecord(p_weatherForecast, p_Day_forecast);
 	}
