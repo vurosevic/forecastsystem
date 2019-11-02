@@ -1,6 +1,8 @@
 package com.deloitte.forecastsystem.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -1053,5 +1055,33 @@ public class PreparedDataLoadSum implements Serializable {
 			this.avgFeelslike, this.minFeelslike, this.maxFeelslike,
 			this.sumLoadForecastEntsoe, this.minLoadForecastEntsoe, this.maxLoadForecastEntsoe};			
 		return retval;
-	}    
+	}
+	
+	public double[] preparedVectorToday() {
+		
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
+		cal.set(this.godina, this.mesec-1, this.dan+1);	
+		
+		double[] retval = {
+			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 			
+			this.avgTemperature3, this.minTemperature3, this.maxTemperature3,
+			this.avgFeelslike3, this.minFeelslike3, this.maxFeelslike3,
+			this.wind3, this.humidity3, this.dewPoint3, this.pressure3,
+			this.sumLoadForecastEntsoe3, this.minLoadForecastEntsoe3, this.maxLoadForecastEntsoe3,
+			this.sumLoadRealData3, this.minLoadRealData3, this.maxLoadRealData3,			
+			this.avgTemperature2, this.minTemperature2, this.maxTemperature2,
+			this.avgFeelslike2, this.minFeelslike2, this.maxFeelslike2,
+			this.wind2, this.humidity2, this.dewPoint2, this.pressure2,
+			this.sumLoadForecastEntsoe2, this.minLoadForecastEntsoe2, this.maxLoadForecastEntsoe2,
+			this.sumLoadRealData2, this.minLoadRealData2, this.maxLoadRealData2,			
+			this.avgTemperature, this.minTemperature, this.maxTemperature,
+			this.avgFeelslike, this.minFeelslike, this.maxFeelslike,
+			this.sumLoadForecastEntsoe, this.minLoadForecastEntsoe, this.maxLoadForecastEntsoe,
+			this.sumLoadRealData, 0, 0,			
+			0, 0, 0,
+			0, 0, 0,
+			0, 0, 0};	
+		
+		return retval;
+	}		
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.deloitte.forecastsystem.model.Country;
 import com.deloitte.forecastsystem.model.LoadForecastEntsoe;
 import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord;
+import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastSumRecord;
 import com.deloitte.forecastsystem.repository.LoadForecastEntsoeRepository;
 import com.deloitte.forecastsystem.service.LoadForecastEntsoeService;
 
@@ -73,5 +74,14 @@ public class LoadForecastEntsoeServiceImpl implements LoadForecastEntsoeService 
 		// TODO Auto-generated method stub
 		return loadForecastEntsoeDAO.findByDateForecastRecord(p_dateOfForecast, p_country, p_loadDate);
 	}
+
+	@Override
+	public LoadEntsoeForecastSumRecord findByDateForecastSumRecord(Date p_dateOfForecast, Country p_country,
+			Date p_loadDate) {
+		// TODO Auto-generated method stub
+		return loadForecastEntsoeDAO.findByDateForecastSumRecord(p_dateOfForecast, p_country, p_loadDate); 
+	}
+	
+	
 
 }

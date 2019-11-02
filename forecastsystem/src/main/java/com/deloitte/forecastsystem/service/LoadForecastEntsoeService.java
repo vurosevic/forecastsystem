@@ -14,6 +14,7 @@ import org.springframework.data.repository.query.Param;
 import com.deloitte.forecastsystem.model.Country;
 import com.deloitte.forecastsystem.model.LoadForecastEntsoe;
 import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord;
+import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastSumRecord;
 
 /**
  *
@@ -33,5 +34,6 @@ public interface LoadForecastEntsoeService {
 //    public Integer findByDateForecastCountryHourAvg(Date p_dateOfForecast, Country p_country, Date p_loadDate, Integer p_loadHour); 
     
     public LoadEntsoeForecastRecord findByDateForecastRecord(Date p_dateOfForecast, Country p_country, Date p_loadDate);     
+    public LoadEntsoeForecastSumRecord findByDateForecastSumRecord(Date p_dateOfForecast, Country p_country, Date p_loadDate);     
     
 }

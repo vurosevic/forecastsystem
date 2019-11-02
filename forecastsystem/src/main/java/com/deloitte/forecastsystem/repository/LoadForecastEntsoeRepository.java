@@ -19,6 +19,7 @@ import org.springframework.data.repository.query.Param;
 import com.deloitte.forecastsystem.model.Country;
 import com.deloitte.forecastsystem.model.LoadForecastEntsoe;
 import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord;
+import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastSumRecord;
 
 /**
  *
@@ -57,5 +58,8 @@ public interface LoadForecastEntsoeRepository extends CrudRepository<LoadForecas
     @Query("SELECT new com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord(AVG(lfe.loadForecastEntsoe), MIN(lfe.loadForecastEntsoe), MAX(lfe.loadForecastEntsoe)) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate")
     public LoadEntsoeForecastRecord findByDateForecastRecord(@Param("p_dateOfForecast") @Temporal(TemporalType.DATE) Date p_dateOfForecast,
                                                     @Param("p_country") Country p_country, @Param("p_loadDate")  @Temporal(TemporalType.DATE)  Date p_loadDate);     
-         
+
+    @Query("SELECT new com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastSumRecord(SUM(lfe.loadForecastEntsoe), MIN(lfe.loadForecastEntsoe), MAX(lfe.loadForecastEntsoe)) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate")
+    public LoadEntsoeForecastSumRecord findByDateForecastSumRecord(@Param("p_dateOfForecast") @Temporal(TemporalType.DATE) Date p_dateOfForecast,
+                                                    @Param("p_country") Country p_country, @Param("p_loadDate")  @Temporal(TemporalType.DATE)  Date p_loadDate);         
 }
