@@ -15,6 +15,7 @@ import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastRecord;
 import com.deloitte.forecastsystem.model.communication.LoadEntsoeForecastSumRecord;
 import com.deloitte.forecastsystem.model.communication.WeatherForecastRecord;
 import com.deloitte.forecastsystem.service.CountryService;
+import com.deloitte.forecastsystem.service.LoadForecastEntsoeByHourService;
 import com.deloitte.forecastsystem.service.LoadForecastEntsoeService;
 import com.deloitte.forecastsystem.service.LoadService;
 import com.deloitte.forecastsystem.service.PreparedDataLoadSumService;
@@ -70,7 +71,8 @@ public class DataVectorSumLoad implements DataVector {
 	WeatherForecastHourlyService weatherForecastHourlyService;
 	
 	@Autowired
-	LoadForecastEntsoeService loadForecastEntsoeService;
+	//LoadForecastEntsoeService loadForecastEntsoeByHourService;
+	LoadForecastEntsoeByHourService loadForecastEntsoeByHourService;
 	
 	@Autowired
 	LoadService loadService;	
@@ -112,13 +114,20 @@ public class DataVectorSumLoad implements DataVector {
 		cal.set(this.godina, this.mesec-1, this.dan+1);
 		Date dateToday = cal.getTime();		
 		
-		System.out.println("DateYesterday: " + dateYesterday);
-		System.out.println("DateToday: " + dateToday);		
+//		System.out.println("DateYesterday: " + dateYesterday);
+//		System.out.println("DateToday: " + dateToday);		
 		
-		List<WeatherForecast> weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
-		WeatherForecastRecord weatherForecastRecord = weatherForecastHourlyService.findByDayForecatsRecord(weatherForecastList.get(0), dateToday);
+		List<WeatherForecast> weatherForecastList;
+		WeatherForecastRecord weatherForecastRecord;
 		
-		LoadEntsoeForecastSumRecord loadEntsoeForecastSumRecord = loadForecastEntsoeService.findByDateForecastSumRecord(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday); 
+		try {
+		 weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
+		 weatherForecastRecord = weatherForecastHourlyService.findByDayForecatsRecord(weatherForecastList.get(0), dateToday);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		LoadEntsoeForecastSumRecord loadEntsoeForecastSumRecord = loadForecastEntsoeByHourService.findByDateForecastSumRecord(dateYesterday, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday); 
 		
 		double[] res = preparedDataLoadSumService.findByDate(this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))).get(0).preparedVectorToday();
 		

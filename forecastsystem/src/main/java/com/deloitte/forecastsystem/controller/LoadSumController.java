@@ -65,11 +65,25 @@ public class LoadSumController {
 		nn.loadLastStateMlpNet();    	
 		
 		dataVector.setCountry(CountriesEnum.values()[o.getLaccountry()-1]);
-		dataVector.setDan(o.getLacday());
+		dataVector.setDan(o.getLacday()); 
 		dataVector.setMesec(o.getLacmonth());
 		dataVector.setGodina(o.getLacyear()); 	
 		
 		Double result = nn.predict(dataVector.getPreparedDataToday());
+		
+//		System.out.println("------------");
+//		System.out.println("GET PREPARED DATA: ");
+//		for (int i=0; i<dataVector.getPreparedData().length; i++) {
+//			System.out.print(dataVector.getPreparedData()[i] + ", ");
+//		}
+//		
+//		dataVector.setDan(o.getLacday()-1);
+//		System.out.println("------------");
+//		System.out.println("GET PREPARED DATA TODAY: ");
+//		for (int i=0; i<dataVector.getPreparedDataToday().length; i++) {
+//			System.out.print(dataVector.getPreparedDataToday()[i] + ", ");
+//		}		
+//		System.out.println("------------");
 		  	
         return ResponseEntity.status(HttpStatus.OK).body(result); 
     }      
@@ -99,7 +113,8 @@ public class LoadSumController {
 			dataVector.setMesec(o.getLacmonth());
 			dataVector.setGodina(o.getLacyear());
 			
-			try {
+			try {				
+				
 			record.setLacday(i);
 			record.setLacmonth(o.getLacmonth());
 			record.setLacyear(o.getLacyear());
