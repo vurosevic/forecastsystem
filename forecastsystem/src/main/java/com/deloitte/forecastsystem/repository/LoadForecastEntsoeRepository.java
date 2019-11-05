@@ -44,6 +44,12 @@ public interface LoadForecastEntsoeRepository extends CrudRepository<LoadForecas
                                @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate, 
                                @Param("p_loadHour") Integer p_loadHour, @Param("p_loadMinute") Integer p_loadMinute); 
 
+    @Query("SELECT AVG(lfe.loadForecastEntsoe) FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast AND country=:p_country AND loadDate=:p_loadDate AND loadHour=:p_loadHour")
+    public Double findByDateForeastAndHour(@Param("p_dateOfForecast") Date p_dateOfForecast,
+                               @Param("p_country") Country p_country, @Param("p_loadDate") Date p_loadDate, 
+                               @Param("p_loadHour") Integer p_loadHour); 
+    
+    
     @Query("SELECT lfe.loadForecastEntsoe FROM LoadForecastEntsoe lfe WHERE dateOfForecast=:p_dateOfForecast")
     public List<LoadForecastEntsoe> findByDateForecast(@Param("p_dateOfForecast") Date p_dateOfForecast); 
 

@@ -47,10 +47,7 @@ public class LoadHourController {
     	System.out.println(o);   
     	
     	List<LoadHoursCommRecords> records = new ArrayList<LoadHoursCommRecords>();
-    	
-//    	YearMonth yearMonthObject = YearMonth.of(o.getLacyear(), o.getLacmonth());
-//    	int daysInMonth = yearMonthObject.lengthOfMonth(); 
-    	    	
+    	   	    	
     	System.out.println("SELECTED COUNTRY: " + CountriesEnum.values()[o.getLhccountry()-1]);
     	
     	for (int i=0; i<24; i++) {
@@ -83,5 +80,46 @@ public class LoadHourController {
     	    	    	
         return ResponseEntity.status(HttpStatus.OK).body(records);  
     } 	
+    
+    @RequestMapping(value = "/predicttoday", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)        
+    public @ResponseBody Object predictTodayByHours(@RequestBody LoadHoursComm o) { 
+    	
+    	System.out.println("PREDICT 'TODAY BY HOURS - LOAD' COMMAND");    	
+    	System.out.println(o);   
+    	
+    	List<LoadHoursCommRecords> records = new ArrayList<LoadHoursCommRecords>();
+    	   	    	
+    	System.out.println("SELECTED COUNTRY: " + CountriesEnum.values()[o.getLhccountry()-1]);
+    	
+    	for (int i=0; i<24; i++) {
+    		
+			MlpNetHoursLoad nn = systemForecast.getNetByCountry(CountriesEnum.values()[o.getLhccountry()-1]);
+			nn.loadLastStateMlpNet();    	
+			
+			LoadHoursCommRecords record = new LoadHoursCommRecords(); 			
+			
+			dataVector.setLoadHour(i);
+			dataVector.setCountry(CountriesEnum.values()[o.getLhccountry()-1]);
+			dataVector.setDan(o.getLhcday());
+			dataVector.setMesec(o.getLhcmonth());
+			dataVector.setGodina(o.getLhcyear());
+			
+			try {
+			record.setLachour(i);
+			record.setLacday(o.getLhcday());
+			record.setLacmonth(o.getLhcmonth());
+			record.setLacyear(o.getLhcyear());
+			record.setLaccountry(o.getLhccountry());					
+			record.setLacForecast(nn.predict(dataVector.getPreparedDataToday()));
+			record.setLacRealLoad(dataVector.getRealLoad());     		
+			records.add(record);
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Data not exist: " + CountriesEnum.values()[o.getLhccountry()-1] + ", " + i + "." + o.getLhcmonth() + "." + o.getLhcyear());
+			}
+    	}
+    	    	    	
+        return ResponseEntity.status(HttpStatus.OK).body(records);  
+    }     
 
 }

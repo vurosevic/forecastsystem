@@ -1,6 +1,8 @@
 package com.deloitte.forecastsystem.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -470,5 +472,33 @@ public class PreparedDataLoadHours implements Serializable {
 			this.avgLoadForecastEntsoe};			
 		return retval;
 	}    
+	
+	public double[] preparedVectorToday() {
+		
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
+		cal.set(this.godina, this.mesec-1, this.dan+1);	
+		
+		double[] retval = {
+			this.loadHour,
+			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
+			
+			this.avgTemperature3, this.avgFeelslike3, this.avgWind3, 
+			this.avgHumidity3, this.avgDewPoint3, this.avgPressure3, 
+			this.avgLoadForecastEntsoe3, this.avgLoadRealData3,
+			
+			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
+			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
+			this.avgLoadForecastEntsoe2, this.avgLoadRealData2,
+			
+			this.avgTemperature, this.avgFeelslike, this.avgWind, 
+			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
+			this.avgLoadForecastEntsoe, this.avgLoadRealData,
+			
+			0, 0, 0, 
+			0, 0, 0, 
+			0};
+		
+		return retval;
+	}	
 
 }

@@ -63,5 +63,12 @@ public class WeatherForecastHourlyServiceImpl implements WeatherForecastHourlySe
 		// TODO Auto-generated method stub
 		return weatherForecastHourlyDAO.findByDayForecatsRecord(p_weatherForecast, p_Day_forecast);
 	}
+
+	@Override
+	public List<WeatherForecastHourly> findByDayForecatsByHour(WeatherForecast p_weatherForecast, Date p_Day_forecast,
+			Integer p_hourForecast) {
+		// TODO Auto-generated method stub
+		return weatherForecastHourlyDAO.findByDayForecatsByHour(p_weatherForecast, p_Day_forecast, p_hourForecast);
+	}
     
 }

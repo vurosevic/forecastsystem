@@ -81,6 +81,13 @@ public class LoadForecastEntsoeServiceImpl implements LoadForecastEntsoeService 
 		// TODO Auto-generated method stub
 		return loadForecastEntsoeDAO.findByDateForecastSumRecord(p_dateOfForecast, p_country, p_loadDate); 
 	}
+
+	@Override
+	public Double findByDateForeastAndHour(Date p_dateOfForecast, Country p_country, Date p_loadDate,
+			Integer p_loadHour) {
+		// TODO Auto-generated method stub
+		return loadForecastEntsoeDAO.findByDateForeastAndHour(p_dateOfForecast, p_country, p_loadDate, p_loadHour);
+	}
 	
 	
 

@@ -28,6 +28,9 @@ public interface LoadForecastEntsoeService {
     public void delete(LoadForecastEntsoe t);    
        
     public Integer findByParam(Date p_dateOfForecast, Country p_country, Date p_loadDate, Integer p_loadHour, Integer p_loadMinute); 
+    public Double findByDateForeastAndHour(Date p_dateOfForecast, 
+            Country p_country, Date p_loadDate, Integer p_loadHour); 
+    
     public List<LoadForecastEntsoe> findByDateForecast(Date p_dateOfForecast); 
     public List<LoadForecastEntsoe> findByDateForecastCountry(Date p_dateOfForecast, Country p_country); 
     public List<LoadForecastEntsoe> findByDateForecastCountryLoadDate(Date p_dateOfForecast, Country p_country, Date p_loadDate); 
