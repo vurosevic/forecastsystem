@@ -115,7 +115,8 @@ public class LoadHourController {
 			records.add(record);
 			} catch (Exception e) {
 				// TODO: handle exception
-				System.out.println("Data not exist: " + CountriesEnum.values()[o.getLhccountry()-1] + ", " + i + "." + o.getLhcmonth() + "." + o.getLhcyear());
+				System.out.println("Error:" + e.getMessage());
+				System.out.println("Data not exist: " + CountriesEnum.values()[o.getLhccountry()-1] + ", " + i + " : " + o.getLhcday() + "." + o.getLhcmonth() + "." + o.getLhcyear());
 			}
     	}
     	    	    	

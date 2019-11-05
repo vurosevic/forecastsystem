@@ -118,19 +118,20 @@ public class DataVectorHoursLoad implements  DataVector {
 		cal.set(Calendar.SECOND, 0);
 		cal.set(Calendar.MILLISECOND, 0);		
 		
+		cal.set(this.godina, this.mesec-1, this.dan); // dodata linija
 		Date dateYesterday = cal.getTime();
-		cal.set(this.godina, this.mesec-1, this.dan+1);
+		cal.set(this.godina, this.mesec-1, this.dan+1); // +1
 		Date dateToday = cal.getTime();		
 		
-//		System.out.println("DateYesterday: " + dateYesterday);
-//		System.out.println("DateToday: " + dateToday);		
+		System.out.println("DateYesterday: " + dateYesterday);
+		System.out.println("DateToday: " + dateToday);		
 		
 		List<WeatherForecast> weatherForecastList;
 		List<WeatherForecastHourly> weatherForecastResults;
 		
 		try {
 		 weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
-		 weatherForecastResults = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastList.get(0), dateToday, loadHour);
+		 weatherForecastResults = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastList.get(0), dateToday, loadHour+16);
 		} catch (Exception e) {
 			return null;
 		}
