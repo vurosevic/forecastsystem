@@ -111,7 +111,7 @@ public class LoadHourController {
 			record.setLacyear(o.getLhcyear());
 			record.setLaccountry(o.getLhccountry());					
 			record.setLacForecast(nn.predict(dataVector.getPreparedDataToday()));
-			record.setLacRealLoad(dataVector.getRealLoad());     		
+			record.setLacRealLoad(0);     		
 			records.add(record);
 			} catch (Exception e) {
 				// TODO: handle exception
