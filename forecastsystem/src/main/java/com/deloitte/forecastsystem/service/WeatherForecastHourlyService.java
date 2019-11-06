@@ -29,7 +29,9 @@ public interface WeatherForecastHourlyService {
     public List<WeatherForecastHourly> findByDate(WeatherForecast p_weatherForecast);     
     public List<WeatherForecastHourly> findByDayForecats(WeatherForecast p_weatherForecast, Date p_Day_forecast);    
     public WeatherForecastRecord findByDayForecatsRecord(WeatherForecast p_weatherForecast, Date p_Day_forecast);       
-    
+
+    public Integer findByDayForecatsByHourStart(WeatherForecast p_weatherForecast, Date p_Day_forecast);    
+   
     public List<WeatherForecastHourly> findByDayForecatsByHour(WeatherForecast p_weatherForecast, Date p_Day_forecast, Integer p_hourForecast);    
     
 }

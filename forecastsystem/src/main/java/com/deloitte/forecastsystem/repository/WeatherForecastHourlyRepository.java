@@ -47,6 +47,9 @@ public interface WeatherForecastHourlyRepository extends CrudRepository<WeatherF
     @Query("SELECT new com.deloitte.forecastsystem.model.communication.WeatherForecastRecord(AVG(wfh.temperature), MIN(wfh.temperature), MAX(wfh.temperature), AVG(wfh.apparentTemperature), MIN(wfh.apparentTemperature), MAX(wfh.apparentTemperature)) FROM WeatherForecastHourly wfh WHERE weatherForecast=:p_weatherForecast AND dayForecast=:p_Day_forecast")
     public WeatherForecastRecord findByDayForecatsRecord(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") @Temporal(TemporalType.DATE) Date p_Day_forecast);       
     
+    @Query("SELECT MIN(wfh.hourForecast) FROM WeatherForecastHourly wfh WHERE weatherForecast=:p_weatherForecast AND dayForecast=:p_Day_forecast")
+    public Integer findByDayForecatsByHourStart(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") Date p_Day_forecast);        
+    
     @Query("SELECT wfh FROM WeatherForecastHourly wfh WHERE weatherForecast=:p_weatherForecast AND dayForecast=:p_Day_forecast AND hourForecast=:p_hourForecast")
     public List<WeatherForecastHourly> findByDayForecatsByHour(@Param("p_weatherForecast") WeatherForecast p_weatherForecast, @Param("p_Day_forecast") Date p_Day_forecast, @Param("p_hourForecast") Integer p_hourForecast);    
     

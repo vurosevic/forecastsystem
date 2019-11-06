@@ -131,7 +131,8 @@ public class DataVectorHoursLoad implements  DataVector {
 		
 		try {
 		 weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
-		 weatherForecastResults = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastList.get(0), dateToday, loadHour+16);
+		 Integer startPos = weatherForecastHourlyService.findByDayForecatsByHourStart(weatherForecastList.get(0), dateToday);
+		 weatherForecastResults = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastList.get(0), dateToday, loadHour+startPos);
 		} catch (Exception e) {
 			return null;
 		}
