@@ -1,7 +1,11 @@
 package com.deloitte.forecastsystem.controller;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +25,14 @@ import com.deloitte.forecastsystem.loadforecast.nnet.MlpNetAvgLoad;
 import com.deloitte.forecastsystem.loadforecast.nnet.MlpNetHoursLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastAvgLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastHoursLoad;
+import com.deloitte.forecastsystem.model.Country;
+import com.deloitte.forecastsystem.model.Load;
 import com.deloitte.forecastsystem.model.communication.LoadAvgComm;
 import com.deloitte.forecastsystem.model.communication.LoadAvgCommRecords;
 import com.deloitte.forecastsystem.model.communication.LoadHoursComm;
 import com.deloitte.forecastsystem.model.communication.LoadHoursCommRecords;
 import com.deloitte.forecastsystem.service.CountryService;
+import com.deloitte.forecastsystem.webscrapload.GrabLoadData;
 
 @RestController
 @RequestMapping("/loadhours")
@@ -91,6 +98,21 @@ public class LoadHourController {
     	   	    	
     	System.out.println("SELECTED COUNTRY: " + CountriesEnum.values()[o.getLhccountry()-1]);
     	
+    	//Get real data for Today
+    	
+    	DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy"); 
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date()); 
+        Date datumForecast= cal.getTime();    
+        
+        Country con = countryService.findById(Long.valueOf(o.getLhccountry()));
+                
+        GrabLoadData gld = new GrabLoadData(con.getLoad());            
+        gld.setDateLoad(dateFormat.format(datumForecast));
+        gld.setCountry(con); 
+        gld.webScrap();    
+        List<Load> listReal = gld.getLoadDataList();
+    	
     	for (int i=0; i<24; i++) {
     		
 			MlpNetHoursLoad nn = systemForecast.getNetByCountry(CountriesEnum.values()[o.getLhccountry()-1]);
@@ -104,14 +126,24 @@ public class LoadHourController {
 			dataVector.setMesec(o.getLhcmonth());
 			dataVector.setGodina(o.getLhcyear());
 			
+			Boolean test = Boolean.FALSE;
+			
 			try {
 			record.setLachour(i);
 			record.setLacday(o.getLhcday());
 			record.setLacmonth(o.getLhcmonth());
 			record.setLacyear(o.getLhcyear());
 			record.setLaccountry(o.getLhccountry());					
-			record.setLacForecast(nn.predict(dataVector.getPreparedDataToday()));
-			record.setLacRealLoad(0);     		
+			record.setLacForecast(nn.predict(dataVector.getPreparedDataToday()));			
+			 
+			for (Load l : listReal) {
+				if ((l.getLoadHour() == i) && (l.getLoadMinute() == 0)) {
+					test = Boolean.TRUE;
+				    record.setLacRealLoad(l.getLoadRealData());	
+				}
+			}
+			if (test == Boolean.FALSE) record.setLacRealLoad(0);  
+			
 			records.add(record);
 			} catch (Exception e) {
 				// TODO: handle exception

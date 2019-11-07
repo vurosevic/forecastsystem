@@ -106,6 +106,13 @@
 	    <artifactId>commons-lang3</artifactId>
 	    <version>3.9</version><!--$NO-MVN-MAN-VER$-->
 	</dependency>   
+	
+	<dependency>	
+	  <groupId>net.sourceforge.htmlunit</groupId>
+	  <artifactId>htmlunit</artifactId>
+	  <version>2.34.1</version>
+	  <type>jar</type>
+	 </dependency>		
 		
 	</dependencies>	
 
