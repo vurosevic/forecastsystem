@@ -1,10 +1,15 @@
 package com.deloitte.forecastsystem.loadforecast.arima;
 
+import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.stereotype.Service;
+
 import com.workday.insights.timeseries.arima.Arima;
 import com.workday.insights.timeseries.arima.struct.ArimaParams;
 import com.workday.insights.timeseries.arima.struct.ForecastResult;
 
-public class ArimaModel {
+@Service("arimaModelService")
+@Configurable
+public class ArimaModelService {
 	
 	int pp;
 	int pd;
@@ -14,12 +19,13 @@ public class ArimaModel {
 	int pQ;
 	int pm;
 	int pForecastSize;
+	double[] dataArrayPart = null;
 	double[] dataArray = null;
 	ArimaParams apar;
 	ForecastResult forecastResult;
 	double[] forecastData;
 
-	public ArimaModel() {
+	public ArimaModelService() {
 		// TODO Auto-generated constructor stub
 		pp = 8;
 		pd = 1;
@@ -32,7 +38,7 @@ public class ArimaModel {
 		dataArray = null;		
 	}	
 	
-	public ArimaModel(int p, int d, int q, int P, int D, int Q, int m, int forecastSize, double[] dataArray) {
+	public ArimaModelService(int p, int d, int q, int P, int D, int Q, int m, int forecastSize, double[] dataArray) {
 		// TODO Auto-generated constructor stub
 		this.pp = p; //8
 		this.pd = d; //1
@@ -48,10 +54,42 @@ public class ArimaModel {
 		forecastData = forecastResult.getForecast();
 	}
 	
+	public void prepareDataArrayPart(int count) {
+		dataArrayPart = new double[count];
+		for (int i=0; i<count; i++) {
+			dataArrayPart[i] = dataArray[i];
+		}
+	}
+	
 	public void trainArima() {
 		apar = new ArimaParams(pp, pd, pq, pP, pD, pQ, pm);
-		forecastResult = Arima.forecast_arima(dataArray, pForecastSize, apar);
+		forecastResult = Arima.forecast_arima(dataArrayPart, pForecastSize, apar);
 		forecastData = forecastResult.getForecast();		
+	}
+	
+	public Double getMape() {
+		
+		if (forecastData == null)			
+		    return Double.NaN;
+		
+		if (forecastData.length == 0)			
+		    return Double.NaN;		
+		
+		if (dataArrayPart == null)			
+		    return Double.NaN;
+		
+		if (dataArrayPart.length == 0)			
+		    return Double.NaN;		
+		
+		Double res = 0.0;
+		
+		for (int i=0; i<forecastData.length; i++) {
+			res += Math.abs(dataArray[dataArrayPart.length+i] - forecastData[i])/dataArray[dataArrayPart.length+i];
+		}
+		
+		res = res / forecastData.length * 100;
+		
+		return res;
 	}
 
 	public int getPp() {

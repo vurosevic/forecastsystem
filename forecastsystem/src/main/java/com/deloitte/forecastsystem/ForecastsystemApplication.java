@@ -11,7 +11,7 @@ import com.deloitte.forecastsystem.loadforecast.nnet.MlpNetAvgLoad;
 import com.deloitte.forecastsystem.loadforecast.systemforecast.SystemForecastAvgLoad;
 import com.deloitte.forecastsystem.service.views.HistoryDataRsService;
 
-@SpringBootApplication(scanBasePackages={"com.*"})
+//@SpringBootApplication(scanBasePackages={"com.*"})
 public class ForecastsystemApplication implements CommandLineRunner {
 	
 	public static void main(String[] args) {
