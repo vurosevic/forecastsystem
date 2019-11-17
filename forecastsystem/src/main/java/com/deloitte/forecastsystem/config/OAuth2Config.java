@@ -30,7 +30,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
 	@Autowired
 	private AuthenticationManager authenticationManager;
 	
-	@Value("${deloitte.oauth.tokenTimeout:3600}")
+	@Value("${deloitte.oauth.tokenTimeout:360000}")
 	private int expiration;
 	
 	@Bean

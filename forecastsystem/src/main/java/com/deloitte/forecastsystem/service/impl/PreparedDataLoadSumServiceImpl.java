@@ -35,4 +35,10 @@ public class PreparedDataLoadSumServiceImpl implements PreparedDataLoadSumServic
 		return preparedDataLoadSumRepository.findRealByDate(p_dan, p_mesec, p_godina, p_country);
 	}
 
+	@Override
+	public double[] getAllRealDataLoadSumByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadSumRepository.getAllRealDataLoadSumByCountry(p_country);
+	}
+
 }

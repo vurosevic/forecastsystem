@@ -23,5 +23,7 @@ public interface PreparedDataLoadSumRepository extends CrudRepository<PreparedDa
     @Query("SELECT pdla.sumLoadRealData FROM PreparedDataLoadSum pdla WHERE dan=:p_dan AND mesec=:p_mesec AND godina=:p_godina AND country=:p_country")
     public Double findRealByDate(@Param("p_dan") Integer p_dan, @Param("p_mesec") Integer p_mesec, @Param("p_godina") Integer p_godina, @Param("p_country") Country p_country);
 	
-	
+    @Query("SELECT pdla.sumLoadRealData FROM PreparedDataLoadSum pdla WHERE country=:p_country ORDER BY id")
+    public double[] getAllRealDataLoadSumByCountry(@Param("p_country") Country p_country);
+    
 }
