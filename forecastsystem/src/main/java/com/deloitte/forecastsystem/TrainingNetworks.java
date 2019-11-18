@@ -119,9 +119,7 @@ public class TrainingNetworks {
     	  System.out.println("Net " + sf.getNet(i).getCountry() + ". MAPE=" + sf.getMapeForNet(i));
       }		
      
-//      System.out.println("Elapsed time: " + diff + " min.");  
-     
-      
+ //     System.out.println("Elapsed time: " + diff + " min.");       
       System.out.println("End.");			
 		    
       

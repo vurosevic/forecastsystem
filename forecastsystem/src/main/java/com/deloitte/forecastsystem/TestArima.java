@@ -1,5 +1,9 @@
 package com.deloitte.forecastsystem;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,6 +13,7 @@ import com.deloitte.forecastsystem.loadforecast.arima.ArimaModelService;
 import com.deloitte.forecastsystem.model.Country;
 import com.deloitte.forecastsystem.service.CountryService;
 import com.deloitte.forecastsystem.service.PreparedDataLoadAvgService;
+import com.deloitte.forecastsystem.service.PreparedDataLoadHoursService;
 import com.deloitte.forecastsystem.service.PreparedDataLoadSumService;
 import com.deloitte.forecastsystem.service.impl.PreparedDataLoadSumServiceImpl;
 
@@ -21,6 +26,9 @@ public class TestArima  implements CommandLineRunner  {
 	
 	@Autowired
 	PreparedDataLoadAvgService preparedDataLoadAvgService; 	
+	
+	@Autowired 
+	PreparedDataLoadHoursService preparedDataLoadHoursService;
 	
 	@Autowired
 	CountryService countryService; 
@@ -43,7 +51,9 @@ public class TestArima  implements CommandLineRunner  {
 		Country con = countryService.findById(1L);
 		
 		//double[] res = preparedDataLoadSumService.getAllRealDataLoadSumByCountry(con);
-		double[] res = preparedDataLoadAvgService.getAllRealDataLoadAvgByCountry(con);
+		//double[] res = preparedDataLoadAvgService.getAllRealDataLoadAvgByCountry(con);
+		double[] res = preparedDataLoadHoursService.getAllRealDataLoadHoursByCountry(con);
+		
 		
 //		for (int i=0; i<res.length; i++) {
 //			  System.out.print(res[i] + " ");	
@@ -54,20 +64,32 @@ public class TestArima  implements CommandLineRunner  {
 		arimaModelService.setDataArray(res);
 		arimaModelService.setpForecastSize(1);		
 
-					arimaModelService.setPp(4);
+//					arimaModelService.setPp(4);
+//					arimaModelService.setPd(1);
+//					arimaModelService.setPq(9);
+		
+					arimaModelService.setPp(7);
 					arimaModelService.setPd(1);
-					arimaModelService.setPq(9);
+					arimaModelService.setPq(2);		
 					
 					
-    				for (int i=350; i<res.length; i++) {
+					
+					File file = new File("arima_loadhours.csv");
+					FileWriter fw = new FileWriter(file.getAbsoluteFile());
+					BufferedWriter bw = new BufferedWriter(fw);				
+					
+    				for (int i=8760; i<res.length; i++) {
 								arimaModelService.prepareDataArrayPart(i);
 								arimaModelService.trainArima();		
 								
-								System.out.println(arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
+								System.out.println(i + ".  "+arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
+								
+								bw.write(arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0] + "\n");									
 								
 								//System.out.println(i + " , MAPE : " + arimaModelService.getMape());
     				}
 					
+					bw.close(); 
 					
 					
 				
@@ -77,8 +99,8 @@ public class TestArima  implements CommandLineRunner  {
 		
 //		arimaModelService.setDataArray(res);
 //		arimaModelService.setpForecastSize(5);
-								
-		
+//								
+//		
 //		for (int p=1; p<10; p++)
 //			for (int d=1; d<10; d++)
 //				for (int q=1; q<10; q++) {
@@ -87,9 +109,11 @@ public class TestArima  implements CommandLineRunner  {
 //					arimaModelService.setPd(d);
 //					arimaModelService.setPq(q);
 //										
-//					arimaModelService.prepareDataArrayPart(365);
-//					arimaModelService.trainArima();		
-//					System.out.println(p + " - " + d + " - " + q + " - " + " , MAPE : " + arimaModelService.getMape());					
+//					arimaModelService.prepareDataArrayPart(8760);
+//					arimaModelService.trainArima();	
+//					
+//					if ((arimaModelService.getMape() < 5)&&(arimaModelService.getMape() >= 0))
+//						System.out.println(p + " - " + d + " - " + q + " - " + " , MAPE : " + arimaModelService.getMape());					
 //					
 //				}		
 		

@@ -11,5 +11,6 @@ public interface PreparedDataLoadHoursService {
 	Optional<PreparedDataLoadHours> findById(Long id);	
     public List<PreparedDataLoadHours> findByDate(Integer p_load_hour, Integer p_dan, Integer p_mesec, Integer p_godina, Country p_country);
     public Double findRealByDate(Integer p_load_hour, Integer p_dan, Integer p_mesec, Integer p_godina, Country p_country);	
+    public double[] getAllRealDataLoadHoursByCountry(Country p_country);
 
 }

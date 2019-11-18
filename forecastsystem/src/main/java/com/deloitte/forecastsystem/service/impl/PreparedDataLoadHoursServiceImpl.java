@@ -37,4 +37,10 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 		return preparedDataLoadHoursRepository.findRealByDate(p_load_hour, p_dan, p_mesec, p_godina, p_country);
 	}
 
+	@Override
+	public double[] getAllRealDataLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllRealDataLoadHoursByCountry(p_country);
+	}
+
 }
