@@ -61,6 +61,13 @@ public class ArimaModelService {
 		}
 	}
 	
+	public void prepareDataArrayPart(int start, int count) {
+		dataArrayPart = new double[count];
+		for (int i=0; i<count; i++) {
+			dataArrayPart[i] = dataArray[start + i];
+		}
+	}	
+	
 	public void trainArima() {
 		apar = new ArimaParams(pp, pd, pq, pP, pD, pQ, pm);
 		forecastResult = Arima.forecast_arima(dataArrayPart, pForecastSize, apar);

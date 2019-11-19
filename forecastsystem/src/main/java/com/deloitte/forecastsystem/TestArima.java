@@ -48,11 +48,11 @@ public class TestArima  implements CommandLineRunner  {
 		
 		System.out.println("TEST ARIMA: ");
 		
-		Country con = countryService.findById(1L);
+		Country con = countryService.findById(2L);
 		
-		//double[] res = preparedDataLoadSumService.getAllRealDataLoadSumByCountry(con);
+		double[] res = preparedDataLoadSumService.getAllRealDataLoadSumByCountry(con);
 		//double[] res = preparedDataLoadAvgService.getAllRealDataLoadAvgByCountry(con);
-		double[] res = preparedDataLoadHoursService.getAllRealDataLoadHoursByCountry(con);
+		//double[] res = preparedDataLoadHoursService.getAllRealDataLoadHoursByCountry(con);
 		
 		
 //		for (int i=0; i<res.length; i++) {
@@ -64,21 +64,21 @@ public class TestArima  implements CommandLineRunner  {
 		arimaModelService.setDataArray(res);
 		arimaModelService.setpForecastSize(1);		
 
-//					arimaModelService.setPp(4);
-//					arimaModelService.setPd(1);
-//					arimaModelService.setPq(9);
+					arimaModelService.setPp(13); //4
+					arimaModelService.setPd(1); //1
+					arimaModelService.setPq(8); //9
 		
-					arimaModelService.setPp(7);
-					arimaModelService.setPd(1);
-					arimaModelService.setPq(2);		
+	//					arimaModelService.setPp(7);
+	//					arimaModelService.setPd(1);
+	//					arimaModelService.setPq(2);		
 					
 					
 					
-					File file = new File("arima_loadhours.csv");
+					File file = new File("arima_loadsum_bih2.csv");
 					FileWriter fw = new FileWriter(file.getAbsoluteFile());
 					BufferedWriter bw = new BufferedWriter(fw);				
 					
-    				for (int i=8760; i<res.length; i++) {
+    				for (int i=365; i<res.length-1; i++) {
 								arimaModelService.prepareDataArrayPart(i);
 								arimaModelService.trainArima();		
 								
@@ -91,25 +91,20 @@ public class TestArima  implements CommandLineRunner  {
 					
 					bw.close(); 
 					
-					
-				
-		
-		
-
 		
 //		arimaModelService.setDataArray(res);
 //		arimaModelService.setpForecastSize(5);
 //								
 //		
-//		for (int p=1; p<10; p++)
-//			for (int d=1; d<10; d++)
-//				for (int q=1; q<10; q++) {
+//		for (int p=1; p<25; p++)
+//			for (int d=1; d<25; d++)
+//				for (int q=1; q<25; q++) {
 //
 //					arimaModelService.setPp(p);
 //					arimaModelService.setPd(d);
 //					arimaModelService.setPq(q);
 //										
-//					arimaModelService.prepareDataArrayPart(8760);
+//					arimaModelService.prepareDataArrayPart(365); //8760
 //					arimaModelService.trainArima();	
 //					
 //					if ((arimaModelService.getMape() < 5)&&(arimaModelService.getMape() >= 0))
