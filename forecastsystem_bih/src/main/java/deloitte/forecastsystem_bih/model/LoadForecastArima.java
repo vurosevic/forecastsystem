@@ -40,7 +40,7 @@ public class LoadForecastArima implements Serializable {
 	private Integer loadMinute;	
 
 	@Column(name="Load_forecast_arima")
-	private Integer loadForecastArima;
+	private Double loadForecastArima;
 	
 	@Column(name="Forecast_date")
 	private Date forecastDate;
@@ -85,11 +85,11 @@ public class LoadForecastArima implements Serializable {
 		this.loadMinute = loadMinute;
 	}
 
-	public Integer getLoadForecastArima() {
+	public Double getLoadForecastArima() {
 		return loadForecastArima;
 	}
 
-	public void setLoadForecastArima(Integer loadForecastArima) {
+	public void setLoadForecastArima(Double loadForecastArima) {
 		this.loadForecastArima = loadForecastArima;
 	}
 

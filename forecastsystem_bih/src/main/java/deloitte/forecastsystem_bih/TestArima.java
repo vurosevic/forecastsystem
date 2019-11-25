@@ -3,6 +3,8 @@ package deloitte.forecastsystem_bih;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.Calendar;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,8 +12,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import deloitte.forecastsystem_bih.loadforecast.arima.ArimaModelService;
+import deloitte.forecastsystem_bih.loadforecast.arima.ArimaRecord;
 import deloitte.forecastsystem_bih.model.Country;
+import deloitte.forecastsystem_bih.model.LoadForecastArima;
 import deloitte.forecastsystem_bih.service.CountryService;
+import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
 
@@ -32,6 +37,9 @@ public class TestArima  implements CommandLineRunner  {
 	
 	@Autowired
 	ArimaModelService arimaModelService;
+	
+	@Autowired
+	LoadForecastArimaService loadForecastArimaService;	
 	
 	public static void main(String[] args){
 
@@ -79,18 +87,35 @@ public class TestArima  implements CommandLineRunner  {
 					
 					
 					
-					File file = new File("arima_loadsum_bih_4.csv");
+					File file = new File("arima_loadsum_bih_5.csv");
 					FileWriter fw = new FileWriter(file.getAbsoluteFile());
-					BufferedWriter bw = new BufferedWriter(fw);				
+					BufferedWriter bw = new BufferedWriter(fw);		
 					
-    				for (int i=8760; i<res.length-1; i++) {
+			        Calendar c = Calendar.getInstance();
+			        c.set(2015, 11, 31, 0, 0, 0);
+					
+					ArimaRecord arimaRec = new ArimaRecord(c.getTime(), 23, new Date()); 
+					LoadForecastArima lfa = new LoadForecastArima();
+					
+					
+    				for (int i=8410; i<res.length-1; i++) {
 								arimaModelService.prepareDataArrayPart(i);
 								//arimaModelService.prepareDataArrayPart(i, 17520);
 								arimaModelService.trainArima();		
 								
 								System.out.println(i + ".  "+arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
 								
-								bw.write(arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0] + "\n");									
+								bw.write(arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0] + "\n");
+								arimaRec.addHourForecast(arimaModelService.getForecastData()[0]);
+								lfa.setCountry(countryService.findById(2L));
+								lfa.setLoadDate(arimaRec.getLoadDate());
+								lfa.setForecastDate(arimaRec.getForecastDate());
+								lfa.setLoadForecastArima(arimaRec.getLoadForecastArima());
+								lfa.setLoadHour(arimaRec.getLoadHour());
+								lfa.setLoadMinute(arimaRec.getLoadMinute());
+								lfa.setId(0L); 
+								
+								loadForecastArimaService.save(lfa);
 								
 								//System.out.println(i + " , MAPE : " + arimaModelService.getMape());
     				}

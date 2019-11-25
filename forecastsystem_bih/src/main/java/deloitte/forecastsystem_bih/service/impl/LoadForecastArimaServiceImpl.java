@@ -13,7 +13,7 @@ import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 
 @Service("loadForecastArimaService")
 @Transactional
-public class LoadForecastArimaImpl implements LoadForecastArimaService {
+public class LoadForecastArimaServiceImpl implements LoadForecastArimaService {
 	
 	@Autowired
 	LoadForecastArimaRepository loadForecastArimaRepository;	
