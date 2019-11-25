@@ -20,7 +20,7 @@ import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
 
-//@SpringBootApplication(scanBasePackages={"deloitte.*"})
+@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class TestArima  implements CommandLineRunner  {
 	
 //	@Autowired
@@ -58,6 +58,10 @@ public class TestArima  implements CommandLineRunner  {
 //		double[] res = preparedDataLoadSumService.getAllRealDataLoadSumByCountry(con);
 		//double[] res = preparedDataLoadAvgService.getAllRealDataLoadAvgByCountry(con);
 		double[] res = preparedDataLoadHoursService.getAllRealDataLoadHoursByCountry(con);
+		int[] res_god = preparedDataLoadHoursService.getAllGodinaLoadHoursByCountry(con);
+		int[] res_mes = preparedDataLoadHoursService.getAllMesecLoadHoursByCountry(con);
+		int[] res_dan = preparedDataLoadHoursService.getAllDanLoadHoursByCountry(con);
+		int[] res_hour = preparedDataLoadHoursService.getAllHourLoadHoursByCountry(con);
 		
 		
 //		for (int i=0; i<res.length; i++) {
@@ -87,25 +91,30 @@ public class TestArima  implements CommandLineRunner  {
 					
 					
 					
-					File file = new File("arima_loadsum_bih_5.csv");
+					File file = new File("arima_loadsum_bih_sredjeno.csv");
 					FileWriter fw = new FileWriter(file.getAbsoluteFile());
 					BufferedWriter bw = new BufferedWriter(fw);		
 					
 			        Calendar c = Calendar.getInstance();
-			        c.set(2015, 11, 31, 0, 0, 0);
-					
-					ArimaRecord arimaRec = new ArimaRecord(c.getTime(), 23, new Date()); 
+
+										 
 					LoadForecastArima lfa = new LoadForecastArima();
 					
 					
-    				for (int i=8410; i<res.length-1; i++) {
+    				for (int i=8410; i<res.length; i++) {
 								arimaModelService.prepareDataArrayPart(i);
 								//arimaModelService.prepareDataArrayPart(i, 17520);
 								arimaModelService.trainArima();		
+
+								
 								
 								System.out.println(i + ".  "+arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
 								
 								bw.write(arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0] + "\n");
+
+						        c.set(res_god[i], res_mes[i]-1, res_dan[i], 0, 0, 0);	
+						        ArimaRecord arimaRec = new ArimaRecord(c.getTime(), res_hour[i], new Date());
+								
 								arimaRec.addHourForecast(arimaModelService.getForecastData()[0]);
 								lfa.setCountry(countryService.findById(2L));
 								lfa.setLoadDate(arimaRec.getLoadDate());

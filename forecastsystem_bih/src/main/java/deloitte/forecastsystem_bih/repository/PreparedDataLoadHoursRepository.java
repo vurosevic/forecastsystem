@@ -25,5 +25,16 @@ public interface PreparedDataLoadHoursRepository extends CrudRepository<Prepared
 	
     @Query("SELECT pdlh.avgLoadRealData FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
     public double[] getAllRealDataLoadHoursByCountry(@Param("p_country") Country p_country);
+    
+    @Query("SELECT pdlh.godina FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public int[] getAllGodinaLoadHoursByCountry(@Param("p_country") Country p_country);
+    
+    @Query("SELECT pdlh.mesec FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public int[] getAllMesecLoadHoursByCountry(@Param("p_country") Country p_country);    
 
+    @Query("SELECT pdlh.dan FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public int[] getAllDanLoadHoursByCountry(@Param("p_country") Country p_country);
+    
+    @Query("SELECT pdlh.loadHour FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public int[] getAllHourLoadHoursByCountry(@Param("p_country") Country p_country);    
 }

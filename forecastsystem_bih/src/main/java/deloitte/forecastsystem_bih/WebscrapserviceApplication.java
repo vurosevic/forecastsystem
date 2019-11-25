@@ -17,7 +17,7 @@ import deloitte.forecastsystem_bih.service.LoadService;
 import deloitte.forecastsystem_bih.service.WeatherService;
 import deloitte.forecastsystem_bih.webscrapload.GrabWeatherData;
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class WebscrapserviceApplication implements CommandLineRunner {
 
   @Autowired
@@ -42,10 +42,10 @@ public class WebscrapserviceApplication implements CommandLineRunner {
       System.out.println("--- DELOITTE SOFTWARE ---");
       System.out.println("--- WEBSCRAPPING WEATHER DATA ---");
       
-      for (int i=1; i<1760; i++) 
+      for (int i=26; i<56; i++) 
       {   
           Thread.sleep(1000); 
-          Date datum = new GregorianCalendar(2015, 0, i).getTime();
+          Date datum = new GregorianCalendar(2019, 9, i).getTime();
           System.out.println("Datum: " + datum);
 
           //for (Country con : countryService.findAll()){

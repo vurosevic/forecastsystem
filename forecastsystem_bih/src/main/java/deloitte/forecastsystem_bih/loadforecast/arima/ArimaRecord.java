@@ -26,15 +26,15 @@ public class ArimaRecord {
 	
 	public void addHourForecast(Double loadForecastArima) {		
         // convert date to calendar
-        Calendar c = Calendar.getInstance();
-        c.setTime(loadDate);
-
-        this.loadHour++;
-        if (this.loadHour == 24) {
-            	this.loadHour = 0;
-		        c.add(Calendar.DATE, 1);
-		        loadDate = c.getTime();            	
-        }        
+//        Calendar c = Calendar.getInstance();
+//        c.setTime(loadDate);
+//
+//        this.loadHour++;
+//        if (this.loadHour == 24) {
+//            	this.loadHour = 0;
+//		        c.add(Calendar.DATE, 1);
+//		        loadDate = c.getTime();            	
+//        }        
         this.loadForecastArima = loadForecastArima;		
 	}
 

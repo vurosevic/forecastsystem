@@ -43,4 +43,28 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 		return preparedDataLoadHoursRepository.getAllRealDataLoadHoursByCountry(p_country);
 	}
 
+	@Override
+	public int[] getAllGodinaLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllGodinaLoadHoursByCountry(p_country); 
+	}
+
+	@Override
+	public int[] getAllMesecLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllMesecLoadHoursByCountry(p_country); 
+	}
+
+	@Override
+	public int[] getAllDanLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllDanLoadHoursByCountry(p_country); 
+	}
+
+	@Override
+	public int[] getAllHourLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllHourLoadHoursByCountry(p_country); 
+	}
+
 }
