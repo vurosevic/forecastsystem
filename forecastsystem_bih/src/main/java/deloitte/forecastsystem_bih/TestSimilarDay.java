@@ -54,8 +54,7 @@ public class TestSimilarDay implements CommandLineRunner {
 		File file = new File("similarday_loadsum_bih.csv");
 		FileWriter fw = new FileWriter(file.getAbsoluteFile());
 		BufferedWriter bw = new BufferedWriter(fw);			
-		
-		Calendar c = Calendar.getInstance();
+				
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
 		
 		for (Long number = 17170L; number < 41589L; number++)
@@ -89,6 +88,7 @@ public class TestSimilarDay implements CommandLineRunner {
 		
 		lfsd.setCountry(con);
 		lfsd.setId(0L);
+		Calendar c = Calendar.getInstance();
 		lfsd.setForecastDate(c.getTime());
 		c.set(recData.getGodina(), recData.getMesec()-1, recData.getDan(), 0, 0, 0);
 		lfsd.setLoadDate(c.getTime());
