@@ -10,12 +10,40 @@ import org.springframework.stereotype.Repository;
 
 import deloitte.forecastsystem_bih.model.Country;
 import deloitte.forecastsystem_bih.model.PreparedDataLoadHours;
+import deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord;
 
 @Repository("preparedDataLoadHoursRepository")
 public interface PreparedDataLoadHoursRepository extends CrudRepository<PreparedDataLoadHours, Long> {
 	
 	@Override
 	Optional<PreparedDataLoadHours> findById(Long id);
+
+    @Query("SELECT new deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord(pdlh.id, pdlh.avgTemperature4, pdlh.avgFeelslike4, pdlh.avgLoadRealData4, pdlh.avgTemperature3, pdlh.avgFeelslike3, pdlh.avgLoadRealData3, pdlh.avgTemperature2, pdlh.avgFeelslike2, pdlh.avgLoadRealData2, pdlh.avgLoadRealData)  FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND id < :p_id AND loadHour=:p_load_hour ORDER BY id")
+    public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(@Param("p_country") Country p_country, @Param("p_id") Long p_id, @Param("p_load_hour") Integer p_load_hour);
+
+    @Query("SELECT new deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord(pdlh.id, pdlh.avgTemperature4, pdlh.avgFeelslike4, pdlh.avgLoadRealData4, pdlh.avgTemperature3, pdlh.avgFeelslike3, pdlh.avgLoadRealData3, pdlh.avgTemperature2, pdlh.avgFeelslike2, pdlh.avgLoadRealData2, pdlh.avgLoadRealData)  FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(@Param("p_country") Country p_country);    
+    
+    @Query("SELECT new deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord(pdlh.id, pdlh.avgTemperature4, pdlh.avgFeelslike4, pdlh.avgLoadRealData4, pdlh.avgTemperature3, pdlh.avgFeelslike3, pdlh.avgLoadRealData3, pdlh.avgTemperature2, pdlh.avgFeelslike2, pdlh.avgLoadRealData2, pdlh.avgLoadRealData)  FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND loadHour=:p_load_hour ORDER BY id")
+    public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(@Param("p_country") Country p_country, @Param("p_load_hour") Integer p_load_hour);    
+    
+    @Query("SELECT MAX(pdlh.avgTemperature4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMaxTemp(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MAX(pdlh.avgFeelslike4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMaxFeelslike(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MAX(pdlh.avgLoadRealData4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMaxRealData(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MIN(pdlh.avgTemperature4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMinTemp(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MIN(pdlh.avgFeelslike4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMinFeelslike(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MIN(pdlh.avgLoadRealData4) FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
+    public Double getDataForSimilarDayMinRealData(@Param("p_country") Country p_country);    
 	
     @Query("SELECT pdlh FROM PreparedDataLoadHours pdlh WHERE loadHour=:p_load_hour AND dan=:p_dan AND mesec=:p_mesec AND godina=:p_godina AND country=:p_country")
     public List<PreparedDataLoadHours> findByDate(@Param("p_load_hour") Integer p_load_hour, @Param("p_dan") Integer p_dan, @Param("p_mesec") Integer p_mesec, @Param("p_godina") Integer p_godina, @Param("p_country") Country p_country);

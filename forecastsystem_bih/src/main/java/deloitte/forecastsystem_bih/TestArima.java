@@ -20,7 +20,7 @@ import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class TestArima  implements CommandLineRunner  {
 	
 //	@Autowired
@@ -36,7 +36,7 @@ public class TestArima  implements CommandLineRunner  {
 	CountryService countryService; 
 	
 	@Autowired
-	ArimaModelService arimaModelService;
+	ArimaModelService arimaModelService;	
 	
 	@Autowired
 	LoadForecastArimaService loadForecastArimaService;	

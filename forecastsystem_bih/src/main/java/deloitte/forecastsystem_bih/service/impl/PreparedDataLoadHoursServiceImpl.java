@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import deloitte.forecastsystem_bih.model.Country;
 import deloitte.forecastsystem_bih.model.PreparedDataLoadHours;
+import deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord;
 import deloitte.forecastsystem_bih.repository.PreparedDataLoadHoursRepository;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
@@ -65,6 +66,60 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 	public int[] getAllHourLoadHoursByCountry(Country p_country) {
 		// TODO Auto-generated method stub
 		return preparedDataLoadHoursRepository.getAllHourLoadHoursByCountry(p_country); 
+	}
+
+	@Override
+	public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country, Long p_id, Integer p_load_hour) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDay(p_country, p_id, p_load_hour);
+	}
+
+	@Override
+	public Double getDataForSimilarDayMaxTemp(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMaxTemp(p_country);
+	}
+
+	@Override
+	public Double getDataForSimilarDayMaxFeelslike(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMaxFeelslike(p_country); 
+	}
+
+	@Override
+	public Double getDataForSimilarDayMaxRealData(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMaxRealData(p_country); 
+	}
+
+	@Override
+	public Double getDataForSimilarDayMinTemp(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMinTemp(p_country); 
+	}
+
+	@Override
+	public Double getDataForSimilarDayMinFeelslike(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMinFeelslike(p_country); 
+	}
+
+	@Override
+	public Double getDataForSimilarDayMinRealData(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDayMinRealData(p_country); 
+	}
+
+	@Override
+    public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country, Integer p_load_hour) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDay(p_country, p_load_hour);  
+	}
+
+	@Override
+	public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getDataForSimilarDay(p_country); 
 	}
 
 }
