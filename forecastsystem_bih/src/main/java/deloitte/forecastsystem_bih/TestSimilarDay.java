@@ -20,7 +20,7 @@ import deloitte.forecastsystem_bih.service.LoadForecastSimilarDayService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class TestSimilarDay implements CommandLineRunner {
 	
 	@Autowired
@@ -57,13 +57,16 @@ public class TestSimilarDay implements CommandLineRunner {
 				
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
 		
-		for (Long number = 17170L; number < 41589L; number++)
+		similarDayService.set(con, 16172L);
+		similarDayService.normalizeData();	
+		
+//		for (Long number = 16172L; number < 41589L; number++)
+		for (Long number = 41589L; number < 41591L; number++)
 		{
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
 		
-		similarDayService.set(con, number-1);
-		similarDayService.normalizeData();			
+		similarDayService.set(con, number-1);		
 		
 		//PreparedDataLoadHoursRecord rec = new PreparedDataLoadHoursRecord(8410L, -3.0,-3.0,687.0,-2.0,-2.0,690.0,-3.0,-3.0,705.0, 624.0); 
 		//PreparedDataLoadHoursRecord rec = new PreparedDataLoadHoursRecord(11500L, 10.0,10.0,360.0, 10.0, 10.0,376.0, 11.0, 11.0, 369.0, 372.0);

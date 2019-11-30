@@ -42,6 +42,8 @@ public class SimilarDayService {
 	
 	public SimilarDayService() {
 		// TODO Auto-generated constructor stub
+		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();		
+		distance = new ArrayList<Double>();			
 	}
 	
 	public SimilarDayService(Country con, Long id, Integer loadHour) {
@@ -59,7 +61,7 @@ public class SimilarDayService {
 		
 		this.dataByHour = preparedDataLoadHoursService.getDataForSimilarDay(con, id, loadHour);
 		
-		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();		
+//		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();		
 		distance = new ArrayList<Double>();		
 	}
 	
@@ -78,7 +80,7 @@ public class SimilarDayService {
 		
 		this.dataByHour = preparedDataLoadHoursService.getDataForSimilarDay(con, id, loadHour);
 		
-		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();	
+//		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();	
 		distance = new ArrayList<Double>();		
 	}
 	
@@ -96,7 +98,7 @@ public class SimilarDayService {
 		this.data = preparedDataLoadHoursService.getDataForSimilarDay(con); 		
 		this.dataByHour = preparedDataLoadHoursService.getDataForSimilarDay(con);
 		
-		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();	
+//		normalizedData = new ArrayList<PreparedDataLoadHoursRecord>();	
 		distance = new ArrayList<Double>();		
 	}		
 	
