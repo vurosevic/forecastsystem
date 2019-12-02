@@ -34,7 +34,7 @@ import deloitte.forecastsystem_bih.loadforecast.datamanipulation.DataManipulatio
 
 public class MlpNetSumLoad implements MlpNet {
 	
-	String savePath = "c:/data/saves/";
+	String savePath = "c:/data/bih/saves/";
 	String modelNamePart = "data_";
 	String earlyStoppingPart = "mlpModel_";
 	
