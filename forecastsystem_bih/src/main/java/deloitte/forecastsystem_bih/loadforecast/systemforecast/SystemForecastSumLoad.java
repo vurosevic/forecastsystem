@@ -41,7 +41,7 @@ public class SystemForecastSumLoad implements SystemForecast {
 		
 		nEpoch = 2000;
 		nSamples = 1100;
-		numInputs = 70;
+		numInputs = 69;
 		numOutputs = 1;
 		momentum = 0.9;
 		learningRate = 0.001555;
