@@ -37,7 +37,7 @@ public class DataManipulationSumLoad implements DataManipulation {
 		switch (this.country) {
 		case CO_RS: res = "select * from dual";
 					break;
-		case CO_BIH: res = "select * from vw_input_data_bih_sum";
+		case CO_BIH: res = "select * from vw_input_data_sum_bih";
 					break;					
 		default:
 				res = "select * from dual";

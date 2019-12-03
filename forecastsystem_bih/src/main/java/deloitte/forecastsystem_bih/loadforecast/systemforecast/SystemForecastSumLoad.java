@@ -39,9 +39,9 @@ public class SystemForecastSumLoad implements SystemForecast {
 		
 		nets = new ArrayList<MlpNetSumLoad>();
 		
-		nEpoch = 2000;
+		nEpoch = 4000;
 		nSamples = 1100;
-		numInputs = 69;
+		numInputs = 70;
 		numOutputs = 1;
 		momentum = 0.9;
 		learningRate = 0.001555;

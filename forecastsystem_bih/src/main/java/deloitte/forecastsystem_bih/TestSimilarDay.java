@@ -61,7 +61,8 @@ public class TestSimilarDay implements CommandLineRunner {
 		similarDayService.normalizeData();	
 		
 //		for (Long number = 16172L; number < 41589L; number++)
-		for (Long number = 41589L; number < 41591L; number++)
+//		for (Long number = 41589L; number < 41591L; number++)
+		for (Long number = 16172L; number < 41591L; number++)
 		{
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
