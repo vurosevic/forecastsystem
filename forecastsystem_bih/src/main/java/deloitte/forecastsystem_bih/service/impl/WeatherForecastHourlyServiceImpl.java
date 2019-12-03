@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import deloitte.forecastsystem_bih.model.WeatherForecast;
 import deloitte.forecastsystem_bih.model.WeatherForecastHourly;
@@ -22,6 +23,7 @@ import deloitte.forecastsystem_bih.service.WeatherForecastHourlyService;
  * @author Vladimir
  */
 @Service("weatherForecastHourlyService")
+@Transactional
 public class WeatherForecastHourlyServiceImpl implements WeatherForecastHourlyService {
 
     @Autowired

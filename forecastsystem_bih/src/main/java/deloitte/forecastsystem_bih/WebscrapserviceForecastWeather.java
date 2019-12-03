@@ -84,11 +84,12 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
             else
                     System.out.println("Daily:");
             //Print daily data
-            for(int i = 0; i<daily.days(); i++){
+            for(int i = 0; i<daily.days()-1; i++){
                     String [] h = daily.getDay(i).getFieldsArray();
                     
                     WeatherForecastDaily wfd = new WeatherForecastDaily();   
                     wfd.setWeatherForecast(wf);
+                    wfd.setId(0L);
                     
                     for(int j=0; j<h.length; j++) {
 			//System.out.println(h[j]+": "  + " Broj: " + j + ", " +daily.getDay(i).getByKey(h[j]));
@@ -149,6 +150,7 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
                     WeatherForecastHourly wfh = new WeatherForecastHourly(); 
                     wfh.setWeatherForecast(wf);
                     wfh.setHourForecast(i+1);
+                    wfh.setId(0L); 
                     
                     for(int j=0; j<h.length; j++) {
 			//System.out.println(h[j]+": " + " Broj: " + j + ", " +hourly.getHour(i).getByKey(h[j]));
