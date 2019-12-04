@@ -4,7 +4,6 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import deloitte.forecastsystem_bih.model.PreparedDataLoadHours;
 import deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
