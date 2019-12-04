@@ -42,10 +42,10 @@ public class WebscrapserviceApplication implements CommandLineRunner {
       System.out.println("--- DELOITTE SOFTWARE ---");
       System.out.println("--- WEBSCRAPPING WEATHER DATA ---");
       
-      for (int i=26; i<56; i++) 
+      for (int i=25; i<34; i++) 
       {   
           Thread.sleep(1000); 
-          Date datum = new GregorianCalendar(2019, 9, i).getTime();
+          Date datum = new GregorianCalendar(2019, 10, i).getTime();
           System.out.println("Datum: " + datum);
 
           //for (Country con : countryService.findAll()){
