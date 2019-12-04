@@ -100,6 +100,7 @@ public class ArimaForecastService48 implements CommandLineRunner {
 		tempLoadForecastArimaService.save(lfa);
         }        
 		
+        System.out.println("END.");
 	}
 
 }
