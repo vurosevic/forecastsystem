@@ -17,7 +17,7 @@ import deloitte.forecastsystem_bih.service.CountryService;
 import deloitte.forecastsystem_bih.service.HistoryLoadForecastService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class LoadForecastTodayService implements CommandLineRunner {
 	
 	@Autowired 
