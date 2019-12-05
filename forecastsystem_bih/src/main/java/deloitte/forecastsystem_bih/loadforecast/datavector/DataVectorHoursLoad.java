@@ -19,6 +19,8 @@ import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.LoadForecastSimilarDayService;
 //import deloitte.forecastsystem_bih.service.LoadForecastEntsoeService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
+import deloitte.forecastsystem_bih.service.TempLoadForecastArimaService;
+import deloitte.forecastsystem_bih.service.TempLoadForecastSimilarDayService;
 import deloitte.forecastsystem_bih.service.WeatherForecastHourlyService;
 import deloitte.forecastsystem_bih.service.WeatherForecastService;
 
@@ -87,10 +89,10 @@ public class DataVectorHoursLoad implements  DataVector {
 	WeatherForecastHourlyService weatherForecastHourlyService;
 	
 	@Autowired
-	LoadForecastArimaService loadForecastArimaService;
+	TempLoadForecastArimaService loadForecastArimaService;
 	
 	@Autowired
-	LoadForecastSimilarDayService loadForecastSimilarDayService;	
+	TempLoadForecastSimilarDayService loadForecastSimilarDayService;	
 	
 	CountriesEnum country;
 	
@@ -151,14 +153,14 @@ public class DataVectorHoursLoad implements  DataVector {
 		
 		double[] res = preparedDataLoadHoursService.findByDate(this.loadHour, this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))).get(0).preparedVector();
 		
-		res[34] = weatherForecastResults.get(0).getTemperature();
-		res[35] = weatherForecastResults.get(0).getApparentTemperature();
-		res[36] = weatherForecastResults.get(0).getWindSpeed();
-		res[37] = weatherForecastResults.get(0).getHumidity();
-		res[38] = weatherForecastResults.get(0).getDewPoint();
-		res[39] = weatherForecastResults.get(0).getPressure();
-		res[40] = loadArimaForecastResult.get(0); // arima_forecast 
-		res[41] = loadSimilarDayForecastResult.get(0); // similar_day_forecast   		
+		res[33] = weatherForecastResults.get(0).getTemperature();
+		res[34] = weatherForecastResults.get(0).getApparentTemperature();
+		res[35] = weatherForecastResults.get(0).getWindSpeed();
+		res[36] = weatherForecastResults.get(0).getHumidity();
+		res[37] = weatherForecastResults.get(0).getDewPoint();
+		res[38] = weatherForecastResults.get(0).getPressure();
+		res[39] = loadArimaForecastResult.get(0); // arima_forecast 
+		res[40] = loadSimilarDayForecastResult.get(0); // similar_day_forecast   		
 		
 		return res;	
 	}		

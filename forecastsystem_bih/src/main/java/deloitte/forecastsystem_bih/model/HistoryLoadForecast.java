@@ -43,7 +43,63 @@ public class HistoryLoadForecast implements Serializable {
 	private Double loadForecastData;
 	
 	@Column(name="Forecast_date")
-	private Date forecastDate;	
+	private Date forecastDate;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	public Date getLoadDate() {
+		return loadDate;
+	}
+
+	public void setLoadDate(Date loadDate) {
+		this.loadDate = loadDate;
+	}
+
+	public Integer getLoadHour() {
+		return loadHour;
+	}
+
+	public void setLoadHour(Integer loadHour) {
+		this.loadHour = loadHour;
+	}
+
+	public Integer getLoadMinute() {
+		return loadMinute;
+	}
+
+	public void setLoadMinute(Integer loadMinute) {
+		this.loadMinute = loadMinute;
+	}
+
+	public Double getLoadForecastData() {
+		return loadForecastData;
+	}
+
+	public void setLoadForecastData(Double loadForecastData) {
+		this.loadForecastData = loadForecastData;
+	}
+
+	public Date getForecastDate() {
+		return forecastDate;
+	}
+
+	public void setForecastDate(Date forecastDate) {
+		this.forecastDate = forecastDate;
+	}	
 	
 	
 }
