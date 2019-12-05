@@ -13,6 +13,11 @@ public class PreparedDataLoadHoursRecord {
 	Double avgLoadRealData2;
 	Double avgLoadRealData;
 	
+	public PreparedDataLoadHoursRecord() {
+		// TODO Auto-generated constructor stub
+		this.id = 0L;
+	}
+	
 	public PreparedDataLoadHoursRecord( Long id, 
 										Double avgTemperature4, Double avgFeelslike4,   Double avgLoadRealData4,
 										Double avgTemperature3, Double avgFeelslike3, 	Double avgLoadRealData3, 
