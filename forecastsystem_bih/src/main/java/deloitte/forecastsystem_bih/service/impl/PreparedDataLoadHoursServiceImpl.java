@@ -122,4 +122,16 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 		return preparedDataLoadHoursRepository.getDataForSimilarDay(p_country); 
 	}
 
+	@Override
+	public Long getMinIndexForPartialData(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getMinIndexForPartialData(p_country);
+	}
+
+	@Override
+	public Long getMaxIndexForPartialData(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getMaxIndexForPartialData(p_country);
+	}
+
 }

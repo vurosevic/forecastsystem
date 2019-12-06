@@ -14,6 +14,9 @@ public interface PreparedDataLoadHoursService {
 	
 	Optional<PreparedDataLoadHours> findById(Long id);	
 	
+	public Long getMinIndexForPartialData(Country p_country);
+	public Long getMaxIndexForPartialData(Country p_country);	
+	
     public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country, Long p_id, Integer p_load_hour);
     public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country); 
     public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(Country p_country, Integer p_load_hour);

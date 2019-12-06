@@ -18,6 +18,12 @@ public interface PreparedDataLoadHoursRepository extends CrudRepository<Prepared
 	@Override
 	Optional<PreparedDataLoadHours> findById(Long id);
 
+    @Query("SELECT MIN(pdlh.id) FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND pdlh.avgLoadForecastArima4=0 AND pdlh.avgLoadForecastArima3=0 AND pdlh.avgLoadForecastArima2=0 AND pdlh.avgLoadForecastArima=0")
+    public Long getMinIndexForPartialData(@Param("p_country") Country p_country);
+    
+    @Query("SELECT MAX(pdlh.id) FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND pdlh.avgLoadForecastArima4=0 AND pdlh.avgLoadForecastArima3=0 AND pdlh.avgLoadForecastArima2=0 AND pdlh.avgLoadForecastArima=0")
+    public Long getMaxIndexForPartialData(@Param("p_country") Country p_country);    
+	
     @Query("SELECT new deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord(pdlh.id, pdlh.avgTemperature4, pdlh.avgFeelslike4, pdlh.avgLoadRealData4, pdlh.avgTemperature3, pdlh.avgFeelslike3, pdlh.avgLoadRealData3, pdlh.avgTemperature2, pdlh.avgFeelslike2, pdlh.avgLoadRealData2, pdlh.avgLoadRealData)  FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND id < :p_id AND loadHour=:p_load_hour ORDER BY id")
     public List<PreparedDataLoadHoursRecord> getDataForSimilarDay(@Param("p_country") Country p_country, @Param("p_id") Long p_id, @Param("p_load_hour") Integer p_load_hour);
 
