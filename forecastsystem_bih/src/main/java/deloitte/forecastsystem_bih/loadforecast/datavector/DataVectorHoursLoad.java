@@ -180,7 +180,7 @@ public class DataVectorHoursLoad implements  DataVector {
 		cal.set(this.godina, this.mesec-1, this.dan+1); 
 		Date dateToday = cal.getTime();		
 		cal.set(this.godina, this.mesec-1, this.dan+2); 
-		Date dateToomorrow = cal.getTime();			
+		Date dateTomorrow = cal.getTime();			
 		
 //		System.out.println("DateYesterday: " + dateYesterday);
 //		System.out.println("DateToday: " + dateToday);		
@@ -206,14 +206,14 @@ public class DataVectorHoursLoad implements  DataVector {
 		
 		try {
 			weatherForecastListTomorrow = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday);
-		 Integer startPos = weatherForecastHourlyService.findByDayForecatsByHourStart(weatherForecastListTomorrow.get(0), dateToomorrow);
-		 weatherForecastResultsTomorrow = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastListTomorrow.get(0), dateToomorrow, loadHour+startPos);
+		 Integer startPos = weatherForecastHourlyService.findByDayForecatsByHourStart(weatherForecastListTomorrow.get(0), dateTomorrow);
+		 weatherForecastResultsTomorrow = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastListTomorrow.get(0), dateTomorrow, loadHour+startPos);
 		} catch (Exception e) {
 			return null;
 		}
 		
-		List<Double> loadArimaForecastResultTomorrow = loadForecastArimaService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToomorrow, loadHour); 		
-		List<Double> loadSimilarDayForecastResultTomorrow = loadForecastSimilarDayService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToomorrow, loadHour);		
+		List<Double> loadArimaForecastResultTomorrow = loadForecastArimaService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateTomorrow, loadHour); 		
+		List<Double> loadSimilarDayForecastResultTomorrow = loadForecastSimilarDayService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateTomorrow, loadHour);		
 		
 		double[] res = preparedDataLoadHoursService.findByDate(this.loadHour, this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))).get(0).preparedVector();
 
