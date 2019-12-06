@@ -15,7 +15,7 @@ import deloitte.forecastsystem_bih.service.CountryService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 import deloitte.forecastsystem_bih.service.TempLoadForecastSimilarDayService;
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class SimilarDayForecastTomorrowService implements CommandLineRunner {
 
 	@Autowired

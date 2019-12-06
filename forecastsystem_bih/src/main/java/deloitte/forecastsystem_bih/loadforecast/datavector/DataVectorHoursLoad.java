@@ -15,6 +15,7 @@ import deloitte.forecastsystem_bih.model.WeatherForecastHourly;
 //import deloitte.forecastsystem_bih.model.communication.LoadEntsoeForecastSumRecord;
 import deloitte.forecastsystem_bih.model.communication.WeatherForecastRecord;
 import deloitte.forecastsystem_bih.service.CountryService;
+import deloitte.forecastsystem_bih.service.HistoryLoadForecastService;
 import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.LoadForecastSimilarDayService;
 //import deloitte.forecastsystem_bih.service.LoadForecastEntsoeService;
@@ -24,9 +25,6 @@ import deloitte.forecastsystem_bih.service.TempLoadForecastSimilarDayService;
 import deloitte.forecastsystem_bih.service.WeatherForecastHourlyService;
 import deloitte.forecastsystem_bih.service.WeatherForecastService;
 
-//
-// Not implemented yet ...
-// 
 
 @Service("dataVectorHoursLoad")
 @Configurable
@@ -93,6 +91,9 @@ public class DataVectorHoursLoad implements  DataVector {
 	
 	@Autowired
 	TempLoadForecastSimilarDayService loadForecastSimilarDayService;	
+	
+	@Autowired
+	HistoryLoadForecastService historyLoadForecastService;
 	
 	CountriesEnum country;
 	
@@ -163,7 +164,80 @@ public class DataVectorHoursLoad implements  DataVector {
 		res[40] = loadSimilarDayForecastResult.get(0); // similar_day_forecast   		
 		
 		return res;	
-	}		
+	}	
+	
+	public double[] getPreparedDataTomorrow() {	
+		
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));
+		cal.set(this.godina, this.mesec-1, this.dan);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);		
+		
+		cal.set(this.godina, this.mesec-1, this.dan); 
+		Date dateYesterday = cal.getTime();
+		cal.set(this.godina, this.mesec-1, this.dan+1); 
+		Date dateToday = cal.getTime();		
+		cal.set(this.godina, this.mesec-1, this.dan+2); 
+		Date dateToomorrow = cal.getTime();			
+		
+//		System.out.println("DateYesterday: " + dateYesterday);
+//		System.out.println("DateToday: " + dateToday);		
+		
+		List<WeatherForecast> weatherForecastList;
+		List<WeatherForecastHourly> weatherForecastResults;
+		
+		try {
+		 weatherForecastList = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateYesterday);
+		 Integer startPos = weatherForecastHourlyService.findByDayForecatsByHourStart(weatherForecastList.get(0), dateToday);
+		 weatherForecastResults = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastList.get(0), dateToday, loadHour+startPos);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		List<Double> loadArimaForecastResult = loadForecastArimaService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday, loadHour); 		
+		List<Double> loadSimilarDayForecastResult = loadForecastSimilarDayService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday, loadHour); 				
+		List<Double> historyLoadForecastResult = historyLoadForecastService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday, loadHour);	
+
+		// tomorrow
+		List<WeatherForecast> weatherForecastListTomorrow;		
+		List<WeatherForecastHourly> weatherForecastResultsTomorrow;
+		
+		try {
+			weatherForecastListTomorrow = weatherForecastService.findByDate(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToday);
+		 Integer startPos = weatherForecastHourlyService.findByDayForecatsByHourStart(weatherForecastListTomorrow.get(0), dateToomorrow);
+		 weatherForecastResultsTomorrow = weatherForecastHourlyService.findByDayForecatsByHour(weatherForecastListTomorrow.get(0), dateToomorrow, loadHour+startPos);
+		} catch (Exception e) {
+			return null;
+		}
+		
+		List<Double> loadArimaForecastResultTomorrow = loadForecastArimaService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToomorrow, loadHour); 		
+		List<Double> loadSimilarDayForecastResultTomorrow = loadForecastSimilarDayService.findByDateLoadAndHour(countryService.findById(Long.valueOf(this.getCountry().ordinal()+1)), dateToomorrow, loadHour);		
+		
+		double[] res = preparedDataLoadHoursService.findByDate(this.loadHour, this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))).get(0).preparedVector();
+
+		res[24] = weatherForecastResults.get(0).getTemperature();
+		res[25] = weatherForecastResults.get(0).getApparentTemperature();
+		res[26] = weatherForecastResults.get(0).getWindSpeed();
+		res[27] = weatherForecastResults.get(0).getHumidity();
+		res[28] = weatherForecastResults.get(0).getDewPoint();
+		res[29] = weatherForecastResults.get(0).getPressure();
+		res[30] = loadArimaForecastResult.get(0); // arima_forecast 
+		res[31] = loadSimilarDayForecastResult.get(0); // similar_day_forecast
+		res[32] = historyLoadForecastResult.get(0); //load forecast for today 
+		
+		res[33] = weatherForecastResultsTomorrow.get(0).getTemperature();
+		res[34] = weatherForecastResultsTomorrow.get(0).getApparentTemperature();
+		res[35] = weatherForecastResultsTomorrow.get(0).getWindSpeed();
+		res[36] = weatherForecastResultsTomorrow.get(0).getHumidity();
+		res[37] = weatherForecastResultsTomorrow.get(0).getDewPoint();
+		res[38] = weatherForecastResultsTomorrow.get(0).getPressure();
+		res[39] = loadArimaForecastResultTomorrow.get(0); // arima_forecast 
+		res[40] = loadSimilarDayForecastResultTomorrow.get(0); // similar_day_forecast   		
+		
+		return res;	
+	}	
 	
 	public double getRealLoad() {
 		return preparedDataLoadHoursService.findRealByDate(this.loadHour, this.dan, this.mesec, this.godina, countryService.findById(Long.valueOf(this.getCountry().ordinal()+1))); 

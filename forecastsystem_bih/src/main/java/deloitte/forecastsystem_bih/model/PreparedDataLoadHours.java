@@ -483,5 +483,33 @@ public class PreparedDataLoadHours implements Serializable {
 		
 		return retval;
 	}	
+	
+	public double[] preparedVectorTomorrow() {
+		
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
+		cal.set(this.godina, this.mesec-1, this.dan+1);	
+		
+		double[] retval = {
+			this.loadHour,
+			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
+								
+			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
+			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
+			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,
+			
+			this.avgTemperature, this.avgFeelslike, this.avgWind, 
+			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
+			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay,  this.avgLoadRealData,
+			
+			0, 0, 0, 
+			0, 0, 0, 
+			0, 0, 0,			
+			
+			0, 0, 0, 
+			0, 0, 0, 
+			0, 0};
+		
+		return retval;
+	}	
 
 }
