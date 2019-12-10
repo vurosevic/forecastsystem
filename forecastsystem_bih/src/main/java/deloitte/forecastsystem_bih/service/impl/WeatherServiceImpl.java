@@ -54,5 +54,11 @@ public class WeatherServiceImpl implements WeatherService {
 		// TODO Auto-generated method stub
 		return weatherDAO.findByDate(p_forecastTime, p_country);
 	}
+
+	@Override
+	public Date lastDate(Country p_country) {
+		// TODO Auto-generated method stub
+		return weatherDAO.lastDate(p_country);
+	}
     
 }

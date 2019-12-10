@@ -26,5 +26,6 @@ public interface WeatherService {
     public void delete(Weather t);
     public <S extends Weather> S save(S s);  
     public WeatherForecast findByDate(Date p_forecastTime, Country p_country);    
+    public Date lastDate(Country p_country);    
     
 }

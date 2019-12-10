@@ -44,4 +44,7 @@ public interface WeatherRepository extends CrudRepository<Weather, Long>{
     @Query("SELECT wf FROM WeatherForecast wf WHERE forecastTime=:p_forecastTime AND country=:p_country")
     public WeatherForecast findByDate(@Param("p_forecastTime") @Temporal(TemporalType.DATE) Date p_forecastTime, @Param("p_country") Country p_country);    
     
+    @Query("SELECT MAX(wf.weatherDate) FROM Weather wf WHERE country=:p_country")
+    public Date lastDate(@Param("p_country") Country p_country);    
+    
 }
