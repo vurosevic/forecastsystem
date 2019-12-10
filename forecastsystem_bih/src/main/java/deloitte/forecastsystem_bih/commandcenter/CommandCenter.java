@@ -54,56 +54,56 @@ import deloitte.forecastsystem_bih.webscrapload.GrabWeatherData;
 @Configurable
 public class CommandCenter {
 	
-	  @Autowired
-	  CountryService countryService;
-	  
-	  @Autowired
-	  LoadService loadService;
-	  
-	  @Autowired
-	  WeatherService weatherService;	
-	  	    
-	  @Autowired
-	  WeatherForecastService weatherForecastService;
-	
-	  @Autowired
-	  WeatherForecastDailyService weatherForecastDailyService;    
-	
-	  @Autowired
-	  WeatherForecastHourlyService weatherForecastHourlyService; 	  
-	  
-	  @Autowired 
-	  PreparedDataLoadHoursService preparedDataLoadHoursService;
-		
-	  @Autowired
-	  ArimaModelService arimaModelService;	
-		
-	  @Autowired
-	  LoadForecastArimaService loadForecastArimaService;	
-	  
-	  @Autowired
-	  SimilarDayService similarDayService;
+  @Autowired
+  CountryService countryService;
+  
+  @Autowired
+  LoadService loadService;
+  
+  @Autowired
+  WeatherService weatherService;	
+  	    
+  @Autowired
+  WeatherForecastService weatherForecastService;
 
-      @Autowired 
-	  LoadForecastSimilarDayService loadForecastSimilarDayService; 		
-  	
-	  @Autowired
-	  TempLoadForecastArimaService tempLoadForecastArimaService;  
-	  
-	  @Autowired
-	  SimilarDayInputDataService similarDayInputDataService;
-		
-	  @Autowired
-	  TempLoadForecastSimilarDayService tempLoadForecastSimilarDayService;	 
-		
-	  @Autowired
-	  DataVectorHoursLoad dataVector;	 	
-		
-	  @Autowired
-	  SystemForecastHoursLoad systemForecast;
-		
-	  @Autowired
-	  HistoryLoadForecastService historyLoadForecastService;	  
+  @Autowired
+  WeatherForecastDailyService weatherForecastDailyService;    
+
+  @Autowired
+  WeatherForecastHourlyService weatherForecastHourlyService; 	  
+  
+  @Autowired 
+  PreparedDataLoadHoursService preparedDataLoadHoursService;
+	
+  @Autowired
+  ArimaModelService arimaModelService;	
+	
+  @Autowired
+  LoadForecastArimaService loadForecastArimaService;	
+  
+  @Autowired
+  SimilarDayService similarDayService;
+
+  @Autowired 
+  LoadForecastSimilarDayService loadForecastSimilarDayService; 		
+
+  @Autowired
+  TempLoadForecastArimaService tempLoadForecastArimaService;  
+  
+  @Autowired
+  SimilarDayInputDataService similarDayInputDataService;
+	
+  @Autowired
+  TempLoadForecastSimilarDayService tempLoadForecastSimilarDayService;	 
+	
+  @Autowired
+  DataVectorHoursLoad dataVector;	 	
+	
+  @Autowired
+  SystemForecastHoursLoad systemForecast;
+	
+  @Autowired
+  HistoryLoadForecastService historyLoadForecastService;	  
 	
 	public void runWeatherHistoryService() throws InterruptedException {
 		
