@@ -19,7 +19,7 @@ import deloitte.forecastsystem_bih.service.LoadService;
 import deloitte.forecastsystem_bih.service.WeatherService;
 import deloitte.forecastsystem_bih.webscrapload.GrabWeatherData;
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class WebscrapserviceWeather implements CommandLineRunner {
 
   @Autowired

@@ -50,7 +50,7 @@ import deloitte.forecastsystem_bih.service.WeatherForecastService;
 import deloitte.forecastsystem_bih.service.WeatherService;
 import deloitte.forecastsystem_bih.webscrapload.GrabWeatherData;
 
-@Service("dataVectorHoursLoad")
+@Service("commandCenterService")
 @Configurable
 public class CommandCenter {
 	
