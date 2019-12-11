@@ -23,7 +23,7 @@ import deloitte.forecastsystem_bih.service.WeatherForecastDailyService;
 import deloitte.forecastsystem_bih.service.WeatherForecastHourlyService;
 import deloitte.forecastsystem_bih.service.WeatherForecastService;
 
-@SpringBootApplication(scanBasePackages={"deloitte.*"})
+//@SpringBootApplication(scanBasePackages={"deloitte.*"})
 public class WebscrapserviceForecastWeather implements CommandLineRunner {
 	
     @Autowired

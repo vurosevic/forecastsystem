@@ -45,9 +45,10 @@ public class PartialSimilarDayService implements CommandLineRunner {
 		
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
 		
-		similarDayService.set(con, 16172L);
+		similarDayService.set(con, 25059L);
 		similarDayService.normalizeData();	
 		
+		Long start = 25059L;
 		Long startPos = preparedDataLoadHoursService.getMinIndexForPartialData(con);
 		Long endPos = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
 		
@@ -55,12 +56,17 @@ public class PartialSimilarDayService implements CommandLineRunner {
 			System.out.println("No data for update...");
 			return;
 		}
+
+		System.out.println(startPos + "," + endPos);
 		
+	//	for (Long number = 25059L; number < endPos; number++) {
+
 		for (Long number = startPos; number < endPos; number++) {
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
 		
-		similarDayService.set(con, number-1);		
+		similarDayService.set(con, start);		
+		start++;
 		
 		PreparedDataLoadHoursRecord rec = new PreparedDataLoadHoursRecord(number, recData.getAvgTemperature4() , recData.getAvgFeelslike4() , recData.getAvgLoadRealData4(), 
 																			  	  recData.getAvgTemperature3() , recData.getAvgFeelslike3() , recData.getAvgLoadRealData3(), 
