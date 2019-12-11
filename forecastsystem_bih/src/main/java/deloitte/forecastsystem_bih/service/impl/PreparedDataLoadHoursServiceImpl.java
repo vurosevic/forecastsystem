@@ -134,4 +134,10 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 		return preparedDataLoadHoursRepository.getMaxIndexForPartialData(p_country);
 	}
 
+	@Override
+	public long[] getAllIdsLoadHoursByCountry(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getAllIdsLoadHoursByCountry(p_country);
+	}
+
 }

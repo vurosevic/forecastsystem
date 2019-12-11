@@ -32,6 +32,7 @@ public interface PreparedDataLoadHoursService {
     public Double findRealByDate(Integer p_load_hour, Integer p_dan, Integer p_mesec, Integer p_godina, Country p_country);	
     public double[] getAllRealDataLoadHoursByCountry(Country p_country);
 
+    public long[] getAllIdsLoadHoursByCountry(Country p_country);    
     public int[] getAllGodinaLoadHoursByCountry(Country p_country);
     public int[] getAllMesecLoadHoursByCountry(Country p_country);    
     public int[] getAllDanLoadHoursByCountry(Country p_country);

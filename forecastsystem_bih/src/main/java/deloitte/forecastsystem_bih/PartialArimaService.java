@@ -48,11 +48,13 @@ public class PartialArimaService implements CommandLineRunner {
 		int[] res_mes = preparedDataLoadHoursService.getAllMesecLoadHoursByCountry(con);
 		int[] res_dan = preparedDataLoadHoursService.getAllDanLoadHoursByCountry(con);
 		int[] res_hour = preparedDataLoadHoursService.getAllHourLoadHoursByCountry(con);
+		long[] ids = preparedDataLoadHoursService.getAllIdsLoadHoursByCountry(con);
 		
-		Long startPos = preparedDataLoadHoursService.getMinIndexForPartialData(con);
-		Long endPos = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
 		
-		if (startPos == null) {
+		Long startId = preparedDataLoadHoursService.getMinIndexForPartialData(con);
+		Long endId = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
+		
+		if (startId == null) {
 			System.out.println("No data for update...");
 			return;
 		}
@@ -65,10 +67,25 @@ public class PartialArimaService implements CommandLineRunner {
 		arimaModelService.setPq(1); 
 		
         Calendar c = Calendar.getInstance();
-		LoadForecastArima lfa = new LoadForecastArima();		
+		LoadForecastArima lfa = new LoadForecastArima();	
 		
-		for (int i=25059; i<res.length; i++) {
-		//for (int i=startPos.intValue(); i<res.length; i++) {			
+        Long startPos = -1L; 
+        for (int i=0; i<res.length; i++) { 
+            if (ids[i] == startId) { 
+            	startPos = Long.valueOf(i); 
+                break; 
+            } 
+        } 	
+        
+        System.out.println("Start position: " + startPos);
+        
+		if (startPos == -1) {
+			System.out.println("No data for update...");
+			return;
+		}        
+		
+		//for (int i=25059; i<res.length; i++) {
+		for (int i=startPos.intValue(); i<res.length; i++) {			
 					arimaModelService.prepareDataArrayPart(i);
 					arimaModelService.trainArima();		
 					

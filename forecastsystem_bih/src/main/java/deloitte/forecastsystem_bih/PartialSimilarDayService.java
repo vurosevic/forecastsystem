@@ -44,29 +44,43 @@ public class PartialSimilarDayService implements CommandLineRunner {
 		Country con = countryService.findById(2L);	
 		
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
+				
+		//Long start = 25059L;
+		long[] ids = preparedDataLoadHoursService.getAllIdsLoadHoursByCountry(con);		
 		
-		similarDayService.set(con, 25059L);
-		similarDayService.normalizeData();	
+		Long startId = preparedDataLoadHoursService.getMinIndexForPartialData(con);
+		Long endId = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
 		
-		Long start = 25059L;
-		Long startPos = preparedDataLoadHoursService.getMinIndexForPartialData(con);
-		Long endPos = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
-		
-		if (startPos == null) {
+		if (startId == null) {
 			System.out.println("No data for update...");
 			return;
 		}
-
-		System.out.println(startPos + "," + endPos);
+		
+        Long startPos = -1L; 
+        for (int i=0; i<ids.length; i++) { 
+            if (ids[i] == startId) { 
+            	startPos = Long.valueOf(i); 
+                break; 
+            } 
+        } 	
+        
+        System.out.println("Start position: " + startPos);		
+		System.out.println("Id interval: " + startId + "," + endId);
+		
+		similarDayService.set(con, startPos);
+		similarDayService.normalizeData();	
+		
 		
 	//	for (Long number = 25059L; number < endPos; number++) {
-
-		for (Long number = startPos; number < endPos; number++) {
+		for (Long number = startId; number < endId; number++) {
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
 		
-		similarDayService.set(con, start);		
-		start++;
+		similarDayService.set(con, startPos);
+		startPos++;
+		
+		//similarDayService.set(con, start);		
+		//start++;
 		
 		PreparedDataLoadHoursRecord rec = new PreparedDataLoadHoursRecord(number, recData.getAvgTemperature4() , recData.getAvgFeelslike4() , recData.getAvgLoadRealData4(), 
 																			  	  recData.getAvgTemperature3() , recData.getAvgFeelslike3() , recData.getAvgLoadRealData3(), 
