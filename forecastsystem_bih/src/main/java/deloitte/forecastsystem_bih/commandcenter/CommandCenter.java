@@ -207,7 +207,7 @@ public class CommandCenter {
                     else if (h[j].equals("temperatureLow")) 
                          wfd.setTemperatureLow(Double.valueOf(daily.getDay(i).getByKey(h[j])));   
                     else if (h[j].equals("humidity")) 
-                         wfd.setHumidity(Double.valueOf(daily.getDay(i).getByKey(h[j])));              
+                         wfd.setHumidity(Double.valueOf(daily.getDay(i).getByKey(h[j]))*100);              
                     else if (h[j].equals("windSpeed")) 
                          wfd.setWindSpeed(Double.valueOf(daily.getDay(i).getByKey(h[j])));    
                     else if (h[j].equals("apparentTemperatureLow")) 
@@ -273,7 +273,7 @@ public class CommandCenter {
                         else if (h[j].equals("temperature"))                         
                             wfh.setTemperature(Double.valueOf(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("humidity"))                         
-                            wfh.setHumidity(Double.valueOf(hourly.getHour(i).getByKey(h[j])));     
+                            wfh.setHumidity(Double.valueOf(hourly.getHour(i).getByKey(h[j]))*100);     
                         else if (h[j].equals("time")) 
                             wfh.setDayForecast(formatter.parse(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("windSpeed"))                         
@@ -300,11 +300,13 @@ public class CommandCenter {
 		int[] res_mes = preparedDataLoadHoursService.getAllMesecLoadHoursByCountry(con);
 		int[] res_dan = preparedDataLoadHoursService.getAllDanLoadHoursByCountry(con);
 		int[] res_hour = preparedDataLoadHoursService.getAllHourLoadHoursByCountry(con);
+		long[] ids = preparedDataLoadHoursService.getAllIdsLoadHoursByCountry(con);
 		
-		Long startPos = preparedDataLoadHoursService.getMinIndexForPartialData(con);
-		Long endPos = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
 		
-		if (startPos == null) {
+		Long startId = preparedDataLoadHoursService.getMinIndexForPartialData(con);
+		Long endId = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
+		
+		if (startId == null) {
 			System.out.println("No data for update...");
 			return;
 		}
@@ -317,13 +319,28 @@ public class CommandCenter {
 		arimaModelService.setPq(1); 
 		
         Calendar c = Calendar.getInstance();
-		LoadForecastArima lfa = new LoadForecastArima();		
+		LoadForecastArima lfa = new LoadForecastArima();	
 		
-		for (int i=startPos.intValue(); i<res.length; i++) {
+        Long startPos = -1L; 
+        for (int i=0; i<res.length; i++) { 
+            if (ids[i] == startId) { 
+            	startPos = Long.valueOf(i); 
+                break; 
+            } 
+        } 	
+        
+        System.out.println("Start position: " + startPos);
+        
+		if (startPos == -1) {
+			System.out.println("No data for update...");
+			return;
+		}        
+		
+		for (int i=startPos.intValue(); i<res.length; i++) {			
 					arimaModelService.prepareDataArrayPart(i);
 					arimaModelService.trainArima();		
 					
-					//System.out.println(i + ".  "+arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
+					System.out.println(i + ".  "+arimaModelService.getDataArray()[i] + "," + arimaModelService.getForecastData()[0]);
 					
 			        c.set(res_god[i], res_mes[i]-1, res_dan[i], 0, 0, 0);	
 			        ArimaRecord arimaRec = new ArimaRecord(c.getTime(), res_hour[i], new Date());
@@ -348,30 +365,46 @@ public class CommandCenter {
 		
 		System.out.println("--- PARTIAL SIMILAR DAY SERVICE ---");
 		
-		Country con = countryService.findById(2L);	
+		Country con = countryService.findById(2L);			
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
 				
-		Long startPos = preparedDataLoadHoursService.getMinIndexForPartialData(con);
-		Long endPos = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
+		long[] ids = preparedDataLoadHoursService.getAllIdsLoadHoursByCountry(con);		
 		
-		similarDayService.set(con, startPos);
-		similarDayService.normalizeData();			
+		Long startId = preparedDataLoadHoursService.getMinIndexForPartialData(con);
+		Long endId = preparedDataLoadHoursService.getMaxIndexForPartialData(con);
 		
-		if (startPos == null) {
+		if (startId == null) {
 			System.out.println("No data for update...");
 			return;
 		}
 		
-		for (Long number = startPos; number < endPos; number++) {
+        Long startPos = -1L; 
+        for (int i=0; i<ids.length; i++) { 
+            if (ids[i] == startId) { 
+            	startPos = Long.valueOf(i); 
+                break; 
+            } 
+        } 	
+        
+        System.out.println("Start position: " + startPos);		
+		System.out.println("Id interval: " + startId + "," + endId);
+		
+		similarDayService.set(con, startPos);
+		similarDayService.normalizeData();	
+		
+		for (Long number = startId; number <= endId; number++) {
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
 		
-		similarDayService.set(con, number-1);		
+		similarDayService.set(con, startPos);
+		startPos++;
+		
 		PreparedDataLoadHoursRecord rec = new PreparedDataLoadHoursRecord(number, recData.getAvgTemperature4() , recData.getAvgFeelslike4() , recData.getAvgLoadRealData4(), 
 																			  	  recData.getAvgTemperature3() , recData.getAvgFeelslike3() , recData.getAvgLoadRealData3(), 
 																			  	  recData.getAvgTemperature2() , recData.getAvgFeelslike2() , recData.getAvgLoadRealData2(), 
 																			  	  recData.getAvgLoadRealData());		
-		similarDayService.calculateDistance(rec); 	
+		similarDayService.calculateDistance(rec); 
+			
 		lfsd.setCountry(con);
 		lfsd.setId(0L);
 		Calendar c = Calendar.getInstance();
@@ -383,7 +416,7 @@ public class CommandCenter {
 		lfsd.setLoadMinute(0); 
 		loadForecastSimilarDayService.save(lfsd);
 		
-		//System.out.println(recData.getAvgLoadRealData() + "," + similarDayService.getForecast());
+		System.out.println(recData.getAvgLoadRealData() + "," + similarDayService.getForecast());
 		
 		} // number
 		
@@ -500,8 +533,7 @@ public class CommandCenter {
 			
 		}
 
-        System.out.println("--- END SIMILAR DAY FORECAST TODAY SERVICE ---");
-		
+        System.out.println("--- END SIMILAR DAY FORECAST TODAY SERVICE ---");		
 		
 	}
 	

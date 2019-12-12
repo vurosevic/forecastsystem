@@ -51,9 +51,9 @@ public class TestSimilarDay implements CommandLineRunner {
 
 		//Long number = 24560L;
 		
-		File file = new File("similarday_loadsum_bih.csv");
-		FileWriter fw = new FileWriter(file.getAbsoluteFile());
-		BufferedWriter bw = new BufferedWriter(fw);			
+//		File file = new File("similarday_loadsum_bih.csv");
+//		FileWriter fw = new FileWriter(file.getAbsoluteFile());
+//		BufferedWriter bw = new BufferedWriter(fw);			
 				
 		LoadForecastSimilarDay lfsd = new LoadForecastSimilarDay();
 		
@@ -88,7 +88,7 @@ public class TestSimilarDay implements CommandLineRunner {
 //		System.out.println("....... REAL VALUE ......." + recData.getAvgLoadRealData());		
 //		System.out.println("..............");			
 		
-		bw.write(recData.getAvgLoadRealData() + ";" + similarDayService.getForecast() + "\n");
+//		bw.write(recData.getAvgLoadRealData() + ";" + similarDayService.getForecast() + "\n");
 		
 		lfsd.setCountry(con);
 		lfsd.setId(0L);

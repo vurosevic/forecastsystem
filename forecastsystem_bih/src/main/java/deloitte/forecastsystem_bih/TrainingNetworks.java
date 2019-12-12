@@ -28,24 +28,24 @@ public class TrainingNetworks {
 //				
 //	      System.out.println("LoadSUM CSV files are prepared...");		
 	      
-		  System.out.println("Training started...");	
-	      SystemForecastSumLoad sf = new SystemForecastSumLoad();      
-	      Date datum1 = new Date();      
-	
-	      sf.trainEarlyStoppingAllNetsByThread();
-	      
-	      Date datum2 = new Date();
-	      long diffInMillies = Math.abs(datum1.getTime() - datum2.getTime());
-	      long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);      
-	                               
-	      sf.saveStateForAllNets();        
-	      
-	      System.out.println("-----------------------");
-	      System.out.println("Net " + sf.getNet(0).getCountry() + ". MAPE=" + sf.getMapeForNet(0));
-		  System.out.println("-----------------------");      
-	      System.out.println("Elapsed time: " + diff + " min.");
-	      System.out.println("-----------------------");
-	      System.out.println("End.");	  	      
+//		  System.out.println("Training started...");	
+//	      SystemForecastSumLoad sf = new SystemForecastSumLoad();      
+//	      Date datum1 = new Date();      
+//	
+//	      sf.trainEarlyStoppingAllNetsByThread();
+//	      
+//	      Date datum2 = new Date();
+//	      long diffInMillies = Math.abs(datum1.getTime() - datum2.getTime());
+//	      long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);      
+//	                               
+//	      sf.saveStateForAllNets();        
+//	      
+//	      System.out.println("-----------------------");
+//	      System.out.println("Net " + sf.getNet(0).getCountry() + ". MAPE=" + sf.getMapeForNet(0));
+//		  System.out.println("-----------------------");      
+//	      System.out.println("Elapsed time: " + diff + " min.");
+//	      System.out.println("-----------------------");
+//	      System.out.println("End.");	  	      
 	      
 		
 		
@@ -63,24 +63,24 @@ public class TrainingNetworks {
 //	      System.out.println("LoadHOURS CSV files are prepared...");
 		
 
-//	  System.out.println("Training started...");	
-//      SystemForecastHoursLoad sf = new SystemForecastHoursLoad();      
-//      Date datum1 = new Date();      
-//
-//      sf.trainEarlyStoppingAllNetsByThread();
-//      
-//      Date datum2 = new Date();
-//      long diffInMillies = Math.abs(datum1.getTime() - datum2.getTime());
-//      long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);      
-//                               
-//      sf.saveStateForAllNets();        
-//      
-//      System.out.println("-----------------------");
-//      System.out.println("Net " + sf.getNet(0).getCountry() + ". MAPE=" + sf.getMapeForNet(0));
-//	  System.out.println("-----------------------");      
-//      System.out.println("Elapsed time: " + diff + " min.");
-//      System.out.println("-----------------------");
-//      System.out.println("End.");	      
+	  System.out.println("Training started...");	
+      SystemForecastHoursLoad sf = new SystemForecastHoursLoad();      
+      Date datum1 = new Date();      
+
+      sf.trainEarlyStoppingAllNetsByThread();
+      
+      Date datum2 = new Date();
+      long diffInMillies = Math.abs(datum1.getTime() - datum2.getTime());
+      long diff = TimeUnit.MINUTES.convert(diffInMillies, TimeUnit.MILLISECONDS);      
+                               
+      sf.saveStateForAllNets();        
+      
+      System.out.println("-----------------------");
+      System.out.println("Net " + sf.getNet(0).getCountry() + ". MAPE=" + sf.getMapeForNet(0));
+	  System.out.println("-----------------------");      
+      System.out.println("Elapsed time: " + diff + " min.");
+      System.out.println("-----------------------");
+      System.out.println("End.");	      
 		
 		
 
