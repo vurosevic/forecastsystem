@@ -140,4 +140,22 @@ public class PreparedDataLoadHoursServiceImpl implements PreparedDataLoadHoursSe
 		return preparedDataLoadHoursRepository.getAllIdsLoadHoursByCountry(p_country);
 	}
 
+	@Override
+	public <S extends PreparedDataLoadHours> S save(S entity) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.save(entity);
+	}
+
+	@Override
+	public void delete(PreparedDataLoadHours entity) {
+		// TODO Auto-generated method stub
+		preparedDataLoadHoursRepository.delete(entity);
+	}
+
+	@Override
+	public List<PreparedDataLoadHours> getPartialData(Country p_country) {
+		// TODO Auto-generated method stub
+		return preparedDataLoadHoursRepository.getPartialData(p_country); 
+	}
+
 }

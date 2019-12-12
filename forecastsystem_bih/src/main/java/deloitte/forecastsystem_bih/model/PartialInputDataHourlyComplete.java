@@ -1,8 +1,6 @@
 package deloitte.forecastsystem_bih.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,22 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="df_prepared_data_loadhours")
-public class PreparedDataLoadHours implements Serializable {
-	
+@Table(name="vw_prepared_partial_data_bih_complete")
+public class PartialInputDataHourlyComplete implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6018342730783264451L;
+	private static final long serialVersionUID = -6457277999439594117L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ID", nullable=false, updatable = true)
-	private Long id;	
-
-    @ManyToOne
-    @JoinColumn(name = "Country_fk")
-    private Country country;		
+	private Long id;		
+	
+    @Column(name = "Country_fk")
+    private Long countryFk;		
 	
 	@Column(name="Load_hour")
 	private Integer loadHour;	
@@ -165,12 +162,12 @@ public class PreparedDataLoadHours implements Serializable {
 		this.id = id;
 	}
 
-	public Country getCountry() {
-		return country;
+	public Long getCountryFk() {
+		return countryFk;
 	}
 
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setCountryFk(Long countryFk) {
+		this.countryFk = countryFk;
 	}
 
 	public Integer getLoadHour() {
@@ -211,7 +208,7 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setGodina(Integer godina) {
 		this.godina = godina;
-	}	
+	}
 
 	public Integer getHoliday() {
 		return holiday;
@@ -219,70 +216,6 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setHoliday(Integer holiday) {
 		this.holiday = holiday;
-	}
-
-	public Double getAvgLoadForecastArima4() {
-		return avgLoadForecastArima4;
-	}
-
-	public void setAvgLoadForecastArima4(Double avgLoadForecastArima4) {
-		this.avgLoadForecastArima4 = avgLoadForecastArima4;
-	}
-
-	public Double getAvgLoadForecastSimilarDay4() {
-		return avgLoadForecastSimilarDay4;
-	}
-
-	public void setAvgLoadForecastSimilarDay4(Double avgLoadForecastSimilarDay4) {
-		this.avgLoadForecastSimilarDay4 = avgLoadForecastSimilarDay4;
-	}
-
-	public Double getAvgLoadForecastArima3() {
-		return avgLoadForecastArima3;
-	}
-
-	public void setAvgLoadForecastArima3(Double avgLoadForecastArima3) {
-		this.avgLoadForecastArima3 = avgLoadForecastArima3;
-	}
-
-	public Double getAvgLoadForecastSimilarDay3() {
-		return avgLoadForecastSimilarDay3;
-	}
-
-	public void setAvgLoadForecastSimilarDay3(Double avgLoadForecastSimilarDay3) {
-		this.avgLoadForecastSimilarDay3 = avgLoadForecastSimilarDay3;
-	}
-
-	public Double getAvgLoadForecastArima2() {
-		return avgLoadForecastArima2;
-	}
-
-	public void setAvgLoadForecastArima2(Double avgLoadForecastArima2) {
-		this.avgLoadForecastArima2 = avgLoadForecastArima2;
-	}
-
-	public Double getAvgLoadForecastSimilarDay2() {
-		return avgLoadForecastSimilarDay2;
-	}
-
-	public void setAvgLoadForecastSimilarDay2(Double avgLoadForecastSimilarDay2) {
-		this.avgLoadForecastSimilarDay2 = avgLoadForecastSimilarDay2;
-	}
-
-	public Double getAvgLoadForecastArima() {
-		return avgLoadForecastArima;
-	}
-
-	public void setAvgLoadForecastArima(Double avgLoadForecastArima) {
-		this.avgLoadForecastArima = avgLoadForecastArima;
-	}
-
-	public Double getAvgLoadForecastSimilarDay() {
-		return avgLoadForecastSimilarDay;
-	}
-
-	public void setAvgLoadForecastSimilarDay(Double avgLoadForecastSimilarDay) {
-		this.avgLoadForecastSimilarDay = avgLoadForecastSimilarDay;
 	}
 
 	public Double getAvgTemperature4() {
@@ -331,6 +264,22 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setAvgPressure4(Double avgPressure4) {
 		this.avgPressure4 = avgPressure4;
+	}
+
+	public Double getAvgLoadForecastArima4() {
+		return avgLoadForecastArima4;
+	}
+
+	public void setAvgLoadForecastArima4(Double avgLoadForecastArima4) {
+		this.avgLoadForecastArima4 = avgLoadForecastArima4;
+	}
+
+	public Double getAvgLoadForecastSimilarDay4() {
+		return avgLoadForecastSimilarDay4;
+	}
+
+	public void setAvgLoadForecastSimilarDay4(Double avgLoadForecastSimilarDay4) {
+		this.avgLoadForecastSimilarDay4 = avgLoadForecastSimilarDay4;
 	}
 
 	public Double getAvgLoadRealData4() {
@@ -389,6 +338,22 @@ public class PreparedDataLoadHours implements Serializable {
 		this.avgPressure3 = avgPressure3;
 	}
 
+	public Double getAvgLoadForecastArima3() {
+		return avgLoadForecastArima3;
+	}
+
+	public void setAvgLoadForecastArima3(Double avgLoadForecastArima3) {
+		this.avgLoadForecastArima3 = avgLoadForecastArima3;
+	}
+
+	public Double getAvgLoadForecastSimilarDay3() {
+		return avgLoadForecastSimilarDay3;
+	}
+
+	public void setAvgLoadForecastSimilarDay3(Double avgLoadForecastSimilarDay3) {
+		this.avgLoadForecastSimilarDay3 = avgLoadForecastSimilarDay3;
+	}
+
 	public Double getAvgLoadRealData3() {
 		return avgLoadRealData3;
 	}
@@ -443,6 +408,22 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setAvgPressure2(Double avgPressure2) {
 		this.avgPressure2 = avgPressure2;
+	}
+
+	public Double getAvgLoadForecastArima2() {
+		return avgLoadForecastArima2;
+	}
+
+	public void setAvgLoadForecastArima2(Double avgLoadForecastArima2) {
+		this.avgLoadForecastArima2 = avgLoadForecastArima2;
+	}
+
+	public Double getAvgLoadForecastSimilarDay2() {
+		return avgLoadForecastSimilarDay2;
+	}
+
+	public void setAvgLoadForecastSimilarDay2(Double avgLoadForecastSimilarDay2) {
+		this.avgLoadForecastSimilarDay2 = avgLoadForecastSimilarDay2;
 	}
 
 	public Double getAvgLoadRealData2() {
@@ -501,87 +482,29 @@ public class PreparedDataLoadHours implements Serializable {
 		this.avgPressure = avgPressure;
 	}
 
+	public Double getAvgLoadForecastArima() {
+		return avgLoadForecastArima;
+	}
+
+	public void setAvgLoadForecastArima(Double avgLoadForecastArima) {
+		this.avgLoadForecastArima = avgLoadForecastArima;
+	}
+
+	public Double getAvgLoadForecastSimilarDay() {
+		return avgLoadForecastSimilarDay;
+	}
+
+	public void setAvgLoadForecastSimilarDay(Double avgLoadForecastSimilarDay) {
+		this.avgLoadForecastSimilarDay = avgLoadForecastSimilarDay;
+	}
+
 	public Double getAvgLoadRealData() {
 		return avgLoadRealData;
 	}
 
 	public void setAvgLoadRealData(Double avgLoadRealData) {
 		this.avgLoadRealData = avgLoadRealData;
-	}	
-		
-	public double[] preparedVector() {
-		double[] retval = {
-			this.loadHour,
-			this.tipDana, this.dan, this.mesec, this.godina, this.holiday,
-			this.avgTemperature4, this.avgFeelslike4, this.avgWind4, 
-			this.avgHumidity4, this.avgDewPoint4, this.avgPressure4, 
-			this.avgLoadForecastArima4, this.avgLoadForecastSimilarDay4, this.avgLoadRealData4,
-			this.avgTemperature3, this.avgFeelslike3, this.avgWind3, 
-			this.avgHumidity3, this.avgDewPoint3, this.avgPressure3, 
-			this.avgLoadForecastArima3, this.avgLoadForecastSimilarDay3,  this.avgLoadRealData3,
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,		
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay};			
-		return retval;
-	}    
-	
-	public double[] preparedVectorToday() {
-		
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
-		cal.set(this.godina, this.mesec-1, this.dan+1);	
-		
-		double[] retval = {
-			this.loadHour,
-			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
-			
-			this.avgTemperature3, this.avgFeelslike3, this.avgWind3, 
-			this.avgHumidity3, this.avgDewPoint3, this.avgPressure3, 
-			this.avgLoadForecastArima3, this.avgLoadForecastSimilarDay3,  this.avgLoadRealData3,
-			
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,
-			
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay,  this.avgLoadRealData,
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0};
-		
-		return retval;
-	}	
-	
-	public double[] preparedVectorTomorrow() {
-		
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
-		cal.set(this.godina, this.mesec-1, this.dan+1);	
-		
-		double[] retval = {
-			this.loadHour,
-			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
-								
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,
-			
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay,  this.avgLoadRealData,
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0, 0,			
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0};
-		
-		return retval;
-	}	
+	}		
 
+	
 }

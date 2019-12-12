@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ import deloitte.forecastsystem_bih.model.Country;
 import deloitte.forecastsystem_bih.model.HistoryLoadForecast;
 import deloitte.forecastsystem_bih.model.LoadForecastArima;
 import deloitte.forecastsystem_bih.model.LoadForecastSimilarDay;
+import deloitte.forecastsystem_bih.model.PartialInputDataHourlyComplete;
+import deloitte.forecastsystem_bih.model.PartialInputDataHourlyStart;
 import deloitte.forecastsystem_bih.model.PreparedDataLoadHours;
 import deloitte.forecastsystem_bih.model.TempLoadForecastArima;
 import deloitte.forecastsystem_bih.model.TempLoadForecastSimilarDay;
@@ -41,6 +44,8 @@ import deloitte.forecastsystem_bih.service.HistoryLoadForecastService;
 import deloitte.forecastsystem_bih.service.LoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.LoadForecastSimilarDayService;
 import deloitte.forecastsystem_bih.service.LoadService;
+import deloitte.forecastsystem_bih.service.PartialInputDataHourlyCompleteService;
+import deloitte.forecastsystem_bih.service.PartialInputDataHourlyStartService;
 import deloitte.forecastsystem_bih.service.PreparedDataLoadHoursService;
 import deloitte.forecastsystem_bih.service.TempLoadForecastArimaService;
 import deloitte.forecastsystem_bih.service.TempLoadForecastSimilarDayService;
@@ -104,6 +109,12 @@ public class CommandCenter {
 	
   @Autowired
   HistoryLoadForecastService historyLoadForecastService;	  
+  
+  @Autowired
+  PartialInputDataHourlyStartService partialInputDataHourlyStartService;
+  
+  @Autowired
+  PartialInputDataHourlyCompleteService partialInputDataHourlyCompleteService;  
 	
 	public void runWeatherHistoryService() throws InterruptedException {
 		
@@ -695,4 +706,144 @@ public class CommandCenter {
 		
 	}
 
+	public void runPreparePartialInputDataHourlyStart() {
+		
+		List<PartialInputDataHourlyStart> listData = partialInputDataHourlyStartService.findAll();
+		
+		for (PartialInputDataHourlyStart rec : listData) {
+			
+			PreparedDataLoadHours sRec = new PreparedDataLoadHours();
+			
+			sRec.setId(0L); 
+			sRec.setCountry(countryService.findById(rec.getCountryFk())); 
+			sRec.setDan(rec.getDan());
+			sRec.setMesec(rec.getMesec());
+			sRec.setGodina(rec.getGodina());
+			sRec.setLoadHour(rec.getLoadHour());
+			sRec.setHoliday(rec.getHoliday());
+			sRec.setTipDana(rec.getTipDana());
+			
+			sRec.setAvgDewPoint(rec.getAvgDewPoint());
+			sRec.setAvgDewPoint2(rec.getAvgDewPoint3());
+			sRec.setAvgDewPoint3(rec.getAvgDewPoint3());
+			sRec.setAvgDewPoint4(rec.getAvgDewPoint3());
+			
+			sRec.setAvgFeelslike(rec.getAvgFeelslike());
+			sRec.setAvgFeelslike2(rec.getAvgFeelslike2());
+			sRec.setAvgFeelslike3(rec.getAvgFeelslike3());
+			sRec.setAvgFeelslike4(rec.getAvgFeelslike4());
+			
+			sRec.setAvgTemperature(rec.getAvgTemperature());
+			sRec.setAvgTemperature2(rec.getAvgTemperature2());
+			sRec.setAvgTemperature3(rec.getAvgTemperature3());
+			sRec.setAvgTemperature4(rec.getAvgTemperature4());
+			
+			sRec.setAvgHumidity(rec.getAvgHumidity());
+			sRec.setAvgHumidity2(rec.getAvgHumidity2());
+			sRec.setAvgHumidity3(rec.getAvgHumidity3());
+			sRec.setAvgHumidity4(rec.getAvgHumidity4());
+			
+			sRec.setAvgLoadRealData(rec.getAvgLoadRealData());
+			sRec.setAvgLoadRealData2(rec.getAvgLoadRealData2());
+			sRec.setAvgLoadRealData3(rec.getAvgLoadRealData3());
+			sRec.setAvgLoadRealData4(rec.getAvgLoadRealData4());
+			
+			sRec.setAvgPressure(rec.getAvgPressure());
+			sRec.setAvgPressure2(rec.getAvgPressure2());
+			sRec.setAvgPressure3(rec.getAvgPressure3());
+			sRec.setAvgPressure4(rec.getAvgPressure4());
+			
+			sRec.setAvgWind(rec.getAvgWind());
+			sRec.setAvgWind2(rec.getAvgWind2());
+			sRec.setAvgWind3(rec.getAvgWind3());
+			sRec.setAvgWind4(rec.getAvgWind4());
+			
+			sRec.setAvgLoadForecastArima(rec.getAvgLoadForecastArima());
+			sRec.setAvgLoadForecastArima2(rec.getAvgLoadForecastArima2());
+			sRec.setAvgLoadForecastArima3(rec.getAvgLoadForecastArima3());
+			sRec.setAvgLoadForecastArima4(rec.getAvgLoadForecastArima4());
+			
+			sRec.setAvgLoadForecastSimilarDay(rec.getAvgLoadForecastSimilarDay());
+			sRec.setAvgLoadForecastSimilarDay2(rec.getAvgLoadForecastSimilarDay2());
+			sRec.setAvgLoadForecastSimilarDay3(rec.getAvgLoadForecastSimilarDay3());
+			sRec.setAvgLoadForecastSimilarDay4(rec.getAvgLoadForecastSimilarDay4());
+			
+			preparedDataLoadHoursService.save(sRec);
+		}
+		
+	}
+	
+	public void runPreparePartialInputDataHourlyComplete() {
+		
+		// delete start data		
+		List<PreparedDataLoadHours> oldData = preparedDataLoadHoursService.getPartialData(countryService.findById(2L)); 
+		
+		for (PreparedDataLoadHours oldRec : oldData) {
+			preparedDataLoadHoursService.delete(oldRec); 
+		}
+		
+		List<PartialInputDataHourlyComplete> listData = partialInputDataHourlyCompleteService.findAll();
+		
+		for (PartialInputDataHourlyComplete rec : listData) {
+			
+			PreparedDataLoadHours sRec = new PreparedDataLoadHours();
+			
+			sRec.setId(0L); 
+			sRec.setCountry(countryService.findById(rec.getCountryFk())); 
+			sRec.setDan(rec.getDan());
+			sRec.setMesec(rec.getMesec());
+			sRec.setGodina(rec.getGodina());
+			sRec.setLoadHour(rec.getLoadHour());
+			sRec.setHoliday(rec.getHoliday());
+			sRec.setTipDana(rec.getTipDana());
+			
+			sRec.setAvgDewPoint(rec.getAvgDewPoint());
+			sRec.setAvgDewPoint2(rec.getAvgDewPoint3());
+			sRec.setAvgDewPoint3(rec.getAvgDewPoint3());
+			sRec.setAvgDewPoint4(rec.getAvgDewPoint3());
+			
+			sRec.setAvgFeelslike(rec.getAvgFeelslike());
+			sRec.setAvgFeelslike2(rec.getAvgFeelslike2());
+			sRec.setAvgFeelslike3(rec.getAvgFeelslike3());
+			sRec.setAvgFeelslike4(rec.getAvgFeelslike4());
+			
+			sRec.setAvgTemperature(rec.getAvgTemperature());
+			sRec.setAvgTemperature2(rec.getAvgTemperature2());
+			sRec.setAvgTemperature3(rec.getAvgTemperature3());
+			sRec.setAvgTemperature4(rec.getAvgTemperature4());
+			
+			sRec.setAvgHumidity(rec.getAvgHumidity());
+			sRec.setAvgHumidity2(rec.getAvgHumidity2());
+			sRec.setAvgHumidity3(rec.getAvgHumidity3());
+			sRec.setAvgHumidity4(rec.getAvgHumidity4());
+			
+			sRec.setAvgLoadRealData(rec.getAvgLoadRealData());
+			sRec.setAvgLoadRealData2(rec.getAvgLoadRealData2());
+			sRec.setAvgLoadRealData3(rec.getAvgLoadRealData3());
+			sRec.setAvgLoadRealData4(rec.getAvgLoadRealData4());
+			
+			sRec.setAvgPressure(rec.getAvgPressure());
+			sRec.setAvgPressure2(rec.getAvgPressure2());
+			sRec.setAvgPressure3(rec.getAvgPressure3());
+			sRec.setAvgPressure4(rec.getAvgPressure4());
+			
+			sRec.setAvgWind(rec.getAvgWind());
+			sRec.setAvgWind2(rec.getAvgWind2());
+			sRec.setAvgWind3(rec.getAvgWind3());
+			sRec.setAvgWind4(rec.getAvgWind4());
+			
+			sRec.setAvgLoadForecastArima(rec.getAvgLoadForecastArima());
+			sRec.setAvgLoadForecastArima2(rec.getAvgLoadForecastArima2());
+			sRec.setAvgLoadForecastArima3(rec.getAvgLoadForecastArima3());
+			sRec.setAvgLoadForecastArima4(rec.getAvgLoadForecastArima4());
+			
+			sRec.setAvgLoadForecastSimilarDay(rec.getAvgLoadForecastSimilarDay());
+			sRec.setAvgLoadForecastSimilarDay2(rec.getAvgLoadForecastSimilarDay2());
+			sRec.setAvgLoadForecastSimilarDay3(rec.getAvgLoadForecastSimilarDay3());
+			sRec.setAvgLoadForecastSimilarDay4(rec.getAvgLoadForecastSimilarDay4());
+			
+			preparedDataLoadHoursService.save(sRec);
+		}				
+		
+	}
 }

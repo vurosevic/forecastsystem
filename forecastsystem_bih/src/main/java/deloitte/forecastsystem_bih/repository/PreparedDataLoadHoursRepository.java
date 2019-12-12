@@ -18,6 +18,9 @@ public interface PreparedDataLoadHoursRepository extends CrudRepository<Prepared
 	@Override
 	Optional<PreparedDataLoadHours> findById(Long id);
 
+    @Query("SELECT pdlh FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND pdlh.avgLoadForecastArima4=0 AND pdlh.avgLoadForecastArima3=0 AND pdlh.avgLoadForecastArima2=0 AND pdlh.avgLoadForecastArima=0")
+    public List<PreparedDataLoadHours> getPartialData(@Param("p_country") Country p_country);	
+	
     @Query("SELECT MIN(pdlh.id) FROM PreparedDataLoadHours pdlh WHERE country=:p_country AND pdlh.avgLoadForecastArima4=0 AND pdlh.avgLoadForecastArima3=0 AND pdlh.avgLoadForecastArima2=0 AND pdlh.avgLoadForecastArima=0")
     public Long getMinIndexForPartialData(@Param("p_country") Country p_country);
     
@@ -74,4 +77,10 @@ public interface PreparedDataLoadHoursRepository extends CrudRepository<Prepared
     
     @Query("SELECT pdlh.loadHour FROM PreparedDataLoadHours pdlh WHERE country=:p_country ORDER BY id")
     public int[] getAllHourLoadHoursByCountry(@Param("p_country") Country p_country);    
+    
+    @Override
+    <S extends PreparedDataLoadHours> S save(S entity);
+    
+    @Override
+    void delete(PreparedDataLoadHours entity);
 }

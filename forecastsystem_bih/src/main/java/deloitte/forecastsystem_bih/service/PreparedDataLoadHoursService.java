@@ -3,9 +3,6 @@ package deloitte.forecastsystem_bih.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import deloitte.forecastsystem_bih.model.Country;
 import deloitte.forecastsystem_bih.model.PreparedDataLoadHours;
 import deloitte.forecastsystem_bih.model.communication.PreparedDataLoadHoursRecord;
@@ -14,6 +11,7 @@ public interface PreparedDataLoadHoursService {
 	
 	Optional<PreparedDataLoadHours> findById(Long id);	
 	
+	public List<PreparedDataLoadHours> getPartialData(Country p_country);
 	public Long getMinIndexForPartialData(Country p_country);
 	public Long getMaxIndexForPartialData(Country p_country);	
 	
@@ -37,4 +35,7 @@ public interface PreparedDataLoadHoursService {
     public int[] getAllMesecLoadHoursByCountry(Country p_country);    
     public int[] getAllDanLoadHoursByCountry(Country p_country);
     public int[] getAllHourLoadHoursByCountry(Country p_country);   
+    
+    <S extends PreparedDataLoadHours> S save(S entity);
+    void delete(PreparedDataLoadHours entity);    
 }

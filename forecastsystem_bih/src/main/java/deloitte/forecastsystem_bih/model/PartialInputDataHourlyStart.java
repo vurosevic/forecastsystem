@@ -1,8 +1,6 @@
 package deloitte.forecastsystem_bih.model;
 
 import java.io.Serializable;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,147 +12,146 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="df_prepared_data_loadhours")
-public class PreparedDataLoadHours implements Serializable {
-	
+@Table(name="vw_input_data_partial_by_hour_bih")
+public class PartialInputDataHourlyStart implements Serializable {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6018342730783264451L;
+	private static final long serialVersionUID = 620300407501619064L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="ID", nullable=false, updatable = true)
-	private Long id;	
-
-    @ManyToOne
-    @JoinColumn(name = "Country_fk")
-    private Country country;		
+	@Column(name="ID", nullable=false, insertable = false, updatable = false)
+	private Long id;		
 	
-	@Column(name="Load_hour")
+    @Column(name = "Country_fk", insertable = false, updatable = false)
+    private Long countryFk;		
+	
+	@Column(name="Load_hour", insertable = false, updatable = false)
 	private Integer loadHour;	
 	
-	@Column(name="Tip_dana")
+	@Column(name="Tip_dana", insertable = false, updatable = false)
 	private Integer tipDana;
 	
-	@Column(name="Dan")
+	@Column(name="Dan", insertable = false, updatable = false)
 	private Integer dan;
 	
-	@Column(name="Mesec")
+	@Column(name="Mesec", insertable = false, updatable = false)
 	private Integer mesec;	
 
-	@Column(name="Godina")
+	@Column(name="Godina", insertable = false, updatable = false)
 	private Integer godina;
 	
-	@Column(name="Holiday")
+	@Column(name="Holiday", insertable = false, updatable = false)
 	private Integer holiday;			
 	
-	@Column(name="AVG_Temperature4")
+	@Column(name="AVG_Temperature4", insertable = false, updatable = false)
 	private Double avgTemperature4;
 	
-	@Column(name="AVG_Feelslike4")
+	@Column(name="AVG_Feelslike4", insertable = false, updatable = false)
 	private Double avgFeelslike4;	
 
-	@Column(name="AVG_Wind4")
+	@Column(name="AVG_Wind4", insertable = false, updatable = false)
 	private Double avgWind4;
 	
-	@Column(name="AVG_Humidity4")
+	@Column(name="AVG_Humidity4", insertable = false, updatable = false)
 	private Double avgHumidity4;	
 
-	@Column(name="AVG_Dew_point4")
+	@Column(name="AVG_Dew_point4", insertable = false, updatable = false)
 	private Double avgDewPoint4;
 	
-	@Column(name="AVG_Pressure4")
+	@Column(name="AVG_Pressure4", insertable = false, updatable = false)
 	private Double avgPressure4;	
 
-	@Column(name="AVG_Load_forecast_arima4")
+	@Column(name="AVG_Load_forecast_arima4", insertable = false, updatable = false)
 	private Double avgLoadForecastArima4;
 	
-	@Column(name="AVG_Load_forecast_similarday4")
+	@Column(name="AVG_Load_forecast_similarday4", insertable = false, updatable = false)
 	private Double avgLoadForecastSimilarDay4;	
 	
-	@Column(name="AVG_Load_real_data4")
+	@Column(name="AVG_Load_real_data4", insertable = false, updatable = false)
 	private Double avgLoadRealData4;		
 	
-	@Column(name="AVG_Temperature3")
+	@Column(name="AVG_Temperature3", insertable = false, updatable = false)
 	private Double avgTemperature3;
 	
-	@Column(name="AVG_Feelslike3")
+	@Column(name="AVG_Feelslike3", insertable = false, updatable = false)
 	private Double avgFeelslike3;	
 
-	@Column(name="AVG_Wind3")
+	@Column(name="AVG_Wind3", insertable = false, updatable = false)
 	private Double avgWind3;
 	
-	@Column(name="AVG_Humidity3")
+	@Column(name="AVG_Humidity3", insertable = false, updatable = false)
 	private Double avgHumidity3;	
 
-	@Column(name="AVG_Dew_point3")
+	@Column(name="AVG_Dew_point3", insertable = false, updatable = false)
 	private Double avgDewPoint3;
 	
-	@Column(name="AVG_Pressure3")
+	@Column(name="AVG_Pressure3", insertable = false, updatable = false)
 	private Double avgPressure3;	
 
-	@Column(name="AVG_Load_forecast_arima3")
+	@Column(name="AVG_Load_forecast_arima3", insertable = false, updatable = false)
 	private Double avgLoadForecastArima3;
 	
-	@Column(name="AVG_Load_forecast_similarday3")
+	@Column(name="AVG_Load_forecast_similarday3", insertable = false, updatable = false)
 	private Double avgLoadForecastSimilarDay3;
 	
-	@Column(name="AVG_Load_real_data3")
+	@Column(name="AVG_Load_real_data3", insertable = false, updatable = false)
 	private Double avgLoadRealData3;
 		
-	@Column(name="AVG_Temperature2")
+	@Column(name="AVG_Temperature2", insertable = false, updatable = false)
 	private Double avgTemperature2;
 	
-	@Column(name="AVG_Feelslike2")
+	@Column(name="AVG_Feelslike2", insertable = false, updatable = false)
 	private Double avgFeelslike2;	
 
-	@Column(name="AVG_Wind2")
+	@Column(name="AVG_Wind2", insertable = false, updatable = false)
 	private Double avgWind2;
 	
-	@Column(name="AVG_Humidity2")
+	@Column(name="AVG_Humidity2", insertable = false, updatable = false)
 	private Double avgHumidity2;	
 
-	@Column(name="AVG_Dew_point2")
+	@Column(name="AVG_Dew_point2", insertable = false, updatable = false)
 	private Double avgDewPoint2;
 	
-	@Column(name="AVG_Pressure2")
+	@Column(name="AVG_Pressure2", insertable = false, updatable = false)
 	private Double avgPressure2;	
 
-	@Column(name="AVG_Load_forecast_arima2")
+	@Column(name="AVG_Load_forecast_arima2", insertable = false, updatable = false)
 	private Double avgLoadForecastArima2;
 	
-	@Column(name="AVG_Load_forecast_similarday2")
+	@Column(name="AVG_Load_forecast_similarday2", insertable = false, updatable = false)
 	private Double avgLoadForecastSimilarDay2;
 	
-	@Column(name="AVG_Load_real_data2")
+	@Column(name="AVG_Load_real_data2", insertable = false, updatable = false)
 	private Double avgLoadRealData2;
 	
-	@Column(name="AVG_Temperature")
+	@Column(name="AVG_Temperature", insertable = false, updatable = false)
 	private Double avgTemperature;
 	
-	@Column(name="AVG_Feelslike")
+	@Column(name="AVG_Feelslike", insertable = false, updatable = false)
 	private Double avgFeelslike;	
 
-	@Column(name="AVG_Wind")
+	@Column(name="AVG_Wind", insertable = false, updatable = false)
 	private Double avgWind;
 	
-	@Column(name="AVG_Humidity")
+	@Column(name="AVG_Humidity", insertable = false, updatable = false)
 	private Double avgHumidity;	
 
-	@Column(name="AVG_Dew_point")
+	@Column(name="AVG_Dew_point", insertable = false, updatable = false)
 	private Double avgDewPoint;
 	
-	@Column(name="AVG_Pressure")
+	@Column(name="AVG_Pressure", insertable = false, updatable = false)
 	private Double avgPressure;	
 
-	@Column(name="AVG_Load_forecast_arima")
+	@Column(name="AVG_Load_forecast_arima", insertable = false, updatable = false)
 	private Double avgLoadForecastArima;
 	
-	@Column(name="AVG_Load_forecast_similarday")
+	@Column(name="AVG_Load_forecast_similarday", insertable = false, updatable = false)
 	private Double avgLoadForecastSimilarDay;
 	
-	@Column(name="AVG_Load_real_data")
+	@Column(name="AVG_Load_real_data", insertable = false, updatable = false)
 	private Double avgLoadRealData;
 
 	public Long getId() {
@@ -164,13 +161,13 @@ public class PreparedDataLoadHours implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Country getCountry() {
-		return country;
+	
+	public Long getCountryFk() {
+		return countryFk;
 	}
 
-	public void setCountry(Country country) {
-		this.country = country;
+	public void setCountryFk(Long countryFk) {
+		this.countryFk = countryFk;
 	}
 
 	public Integer getLoadHour() {
@@ -211,7 +208,7 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setGodina(Integer godina) {
 		this.godina = godina;
-	}	
+	}
 
 	public Integer getHoliday() {
 		return holiday;
@@ -219,70 +216,6 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setHoliday(Integer holiday) {
 		this.holiday = holiday;
-	}
-
-	public Double getAvgLoadForecastArima4() {
-		return avgLoadForecastArima4;
-	}
-
-	public void setAvgLoadForecastArima4(Double avgLoadForecastArima4) {
-		this.avgLoadForecastArima4 = avgLoadForecastArima4;
-	}
-
-	public Double getAvgLoadForecastSimilarDay4() {
-		return avgLoadForecastSimilarDay4;
-	}
-
-	public void setAvgLoadForecastSimilarDay4(Double avgLoadForecastSimilarDay4) {
-		this.avgLoadForecastSimilarDay4 = avgLoadForecastSimilarDay4;
-	}
-
-	public Double getAvgLoadForecastArima3() {
-		return avgLoadForecastArima3;
-	}
-
-	public void setAvgLoadForecastArima3(Double avgLoadForecastArima3) {
-		this.avgLoadForecastArima3 = avgLoadForecastArima3;
-	}
-
-	public Double getAvgLoadForecastSimilarDay3() {
-		return avgLoadForecastSimilarDay3;
-	}
-
-	public void setAvgLoadForecastSimilarDay3(Double avgLoadForecastSimilarDay3) {
-		this.avgLoadForecastSimilarDay3 = avgLoadForecastSimilarDay3;
-	}
-
-	public Double getAvgLoadForecastArima2() {
-		return avgLoadForecastArima2;
-	}
-
-	public void setAvgLoadForecastArima2(Double avgLoadForecastArima2) {
-		this.avgLoadForecastArima2 = avgLoadForecastArima2;
-	}
-
-	public Double getAvgLoadForecastSimilarDay2() {
-		return avgLoadForecastSimilarDay2;
-	}
-
-	public void setAvgLoadForecastSimilarDay2(Double avgLoadForecastSimilarDay2) {
-		this.avgLoadForecastSimilarDay2 = avgLoadForecastSimilarDay2;
-	}
-
-	public Double getAvgLoadForecastArima() {
-		return avgLoadForecastArima;
-	}
-
-	public void setAvgLoadForecastArima(Double avgLoadForecastArima) {
-		this.avgLoadForecastArima = avgLoadForecastArima;
-	}
-
-	public Double getAvgLoadForecastSimilarDay() {
-		return avgLoadForecastSimilarDay;
-	}
-
-	public void setAvgLoadForecastSimilarDay(Double avgLoadForecastSimilarDay) {
-		this.avgLoadForecastSimilarDay = avgLoadForecastSimilarDay;
 	}
 
 	public Double getAvgTemperature4() {
@@ -331,6 +264,22 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setAvgPressure4(Double avgPressure4) {
 		this.avgPressure4 = avgPressure4;
+	}
+
+	public Double getAvgLoadForecastArima4() {
+		return avgLoadForecastArima4;
+	}
+
+	public void setAvgLoadForecastArima4(Double avgLoadForecastArima4) {
+		this.avgLoadForecastArima4 = avgLoadForecastArima4;
+	}
+
+	public Double getAvgLoadForecastSimilarDay4() {
+		return avgLoadForecastSimilarDay4;
+	}
+
+	public void setAvgLoadForecastSimilarDay4(Double avgLoadForecastSimilarDay4) {
+		this.avgLoadForecastSimilarDay4 = avgLoadForecastSimilarDay4;
 	}
 
 	public Double getAvgLoadRealData4() {
@@ -389,6 +338,22 @@ public class PreparedDataLoadHours implements Serializable {
 		this.avgPressure3 = avgPressure3;
 	}
 
+	public Double getAvgLoadForecastArima3() {
+		return avgLoadForecastArima3;
+	}
+
+	public void setAvgLoadForecastArima3(Double avgLoadForecastArima3) {
+		this.avgLoadForecastArima3 = avgLoadForecastArima3;
+	}
+
+	public Double getAvgLoadForecastSimilarDay3() {
+		return avgLoadForecastSimilarDay3;
+	}
+
+	public void setAvgLoadForecastSimilarDay3(Double avgLoadForecastSimilarDay3) {
+		this.avgLoadForecastSimilarDay3 = avgLoadForecastSimilarDay3;
+	}
+
 	public Double getAvgLoadRealData3() {
 		return avgLoadRealData3;
 	}
@@ -443,6 +408,22 @@ public class PreparedDataLoadHours implements Serializable {
 
 	public void setAvgPressure2(Double avgPressure2) {
 		this.avgPressure2 = avgPressure2;
+	}
+
+	public Double getAvgLoadForecastArima2() {
+		return avgLoadForecastArima2;
+	}
+
+	public void setAvgLoadForecastArima2(Double avgLoadForecastArima2) {
+		this.avgLoadForecastArima2 = avgLoadForecastArima2;
+	}
+
+	public Double getAvgLoadForecastSimilarDay2() {
+		return avgLoadForecastSimilarDay2;
+	}
+
+	public void setAvgLoadForecastSimilarDay2(Double avgLoadForecastSimilarDay2) {
+		this.avgLoadForecastSimilarDay2 = avgLoadForecastSimilarDay2;
 	}
 
 	public Double getAvgLoadRealData2() {
@@ -501,6 +482,22 @@ public class PreparedDataLoadHours implements Serializable {
 		this.avgPressure = avgPressure;
 	}
 
+	public Double getAvgLoadForecastArima() {
+		return avgLoadForecastArima;
+	}
+
+	public void setAvgLoadForecastArima(Double avgLoadForecastArima) {
+		this.avgLoadForecastArima = avgLoadForecastArima;
+	}
+
+	public Double getAvgLoadForecastSimilarDay() {
+		return avgLoadForecastSimilarDay;
+	}
+
+	public void setAvgLoadForecastSimilarDay(Double avgLoadForecastSimilarDay) {
+		this.avgLoadForecastSimilarDay = avgLoadForecastSimilarDay;
+	}
+
 	public Double getAvgLoadRealData() {
 		return avgLoadRealData;
 	}
@@ -508,80 +505,6 @@ public class PreparedDataLoadHours implements Serializable {
 	public void setAvgLoadRealData(Double avgLoadRealData) {
 		this.avgLoadRealData = avgLoadRealData;
 	}	
-		
-	public double[] preparedVector() {
-		double[] retval = {
-			this.loadHour,
-			this.tipDana, this.dan, this.mesec, this.godina, this.holiday,
-			this.avgTemperature4, this.avgFeelslike4, this.avgWind4, 
-			this.avgHumidity4, this.avgDewPoint4, this.avgPressure4, 
-			this.avgLoadForecastArima4, this.avgLoadForecastSimilarDay4, this.avgLoadRealData4,
-			this.avgTemperature3, this.avgFeelslike3, this.avgWind3, 
-			this.avgHumidity3, this.avgDewPoint3, this.avgPressure3, 
-			this.avgLoadForecastArima3, this.avgLoadForecastSimilarDay3,  this.avgLoadRealData3,
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,		
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay};			
-		return retval;
-	}    
 	
-	public double[] preparedVectorToday() {
-		
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
-		cal.set(this.godina, this.mesec-1, this.dan+1);	
-		
-		double[] retval = {
-			this.loadHour,
-			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
-			
-			this.avgTemperature3, this.avgFeelslike3, this.avgWind3, 
-			this.avgHumidity3, this.avgDewPoint3, this.avgPressure3, 
-			this.avgLoadForecastArima3, this.avgLoadForecastSimilarDay3,  this.avgLoadRealData3,
-			
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,
-			
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay,  this.avgLoadRealData,
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0};
-		
-		return retval;
-	}	
 	
-	public double[] preparedVectorTomorrow() {
-		
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Europe/Belgrade"));		
-		cal.set(this.godina, this.mesec-1, this.dan+1);	
-		
-		double[] retval = {
-			this.loadHour,
-			cal.get(Calendar.DAY_OF_WEEK), cal.get(Calendar.DAY_OF_MONTH), (cal.get(Calendar.MONTH)+1), cal.get(Calendar.YEAR), 		
-								
-			this.avgTemperature2, this.avgFeelslike2, this.avgWind2, 
-			this.avgHumidity2, this.avgDewPoint2, this.avgPressure2, 
-			this.avgLoadForecastArima2, this.avgLoadForecastSimilarDay2,  this.avgLoadRealData2,
-			
-			this.avgTemperature, this.avgFeelslike, this.avgWind, 
-			this.avgHumidity, this.avgDewPoint, this.avgPressure, 
-			this.avgLoadForecastArima, this.avgLoadForecastSimilarDay,  this.avgLoadRealData,
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0, 0,			
-			
-			0, 0, 0, 
-			0, 0, 0, 
-			0, 0};
-		
-		return retval;
-	}	
-
 }
