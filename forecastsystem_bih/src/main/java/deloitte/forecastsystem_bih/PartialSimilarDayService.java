@@ -72,7 +72,7 @@ public class PartialSimilarDayService implements CommandLineRunner {
 		
 		
 	//	for (Long number = 25059L; number < endPos; number++) {
-		for (Long number = startId; number < endId; number++) {
+		for (Long number = startId; number <= endId; number++) {
 		
 		PreparedDataLoadHours recData = preparedDataLoadHoursService.findById(number).get();
 		

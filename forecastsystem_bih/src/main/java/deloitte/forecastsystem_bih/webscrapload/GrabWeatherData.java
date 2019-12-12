@@ -74,7 +74,7 @@ public class GrabWeatherData {
                     ld.setWind(0.0);      
                    
                    String humid = rt.getCell(5).asText();
-                   ld.setHumidity(Double.parseDouble(humid.substring(0, humid.length()-1))); 
+                   ld.setHumidity(Double.parseDouble(humid.substring(0, humid.length()-1))*100); 
                    String dew = rt.getCell(6).asText();
                    ld.setDewPoint(Double.parseDouble(dew.substring(0, dew.length()-2))); 
                    String pressure = rt.getCell(7).asText();
