@@ -84,7 +84,7 @@ public class PartialArimaService implements CommandLineRunner {
 			return;
 		}        
 		
-		//for (int i=25059; i<res.length; i++) {
+		//for (int i=25606; i<res.length; i++) {
 		for (int i=startPos.intValue(); i<res.length; i++) {			
 					arimaModelService.prepareDataArrayPart(i);
 					arimaModelService.trainArima();		
