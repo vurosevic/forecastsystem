@@ -27,13 +27,17 @@ public class PrepareData implements CommandLineRunner {
 		// TODO Auto-generated method stub
 	
 		System.out.println("PREPARE DATA SERVICE: ");
-		
-		Country con = countryService.findById(2L);		
-		
+				
 		commandCenter.runPreparePartialInputDataHourlyStart();
 		commandCenter.runPartialArimaService();
 		commandCenter.runPartialSimilarDayService();
 		commandCenter.runPreparePartialInputDataHourlyComplete();
+		
+		commandCenter.runArimaForecastService();
+		commandCenter.runSimilarDayTodayService();
+		commandCenter.runLoadForecastTodayService();
+		commandCenter.runSimilarDayTomorrowService();
+		commandCenter.runLoadForecastTomorrowService();		
 		
 		System.out.println("END. ");
 	}
