@@ -39,13 +39,13 @@ public class SystemForecastHoursLoad implements SystemForecast {
 		
 		nets = new ArrayList<MlpNetHoursLoad>();
 		
-		nEpoch = 4000;
+		nEpoch = 8000;
 		nSamples = 26000; // 26000 33000
 		numInputs = 41; // 41 37
 		numOutputs = 1;
 		momentum = 0.9;
-		learningRate = 0.001555;
-		batchSize = 75; //35 250 
+		learningRate = 0.002555; // 0.001555
+		batchSize = 80; //35 250 75
 		        
         MlpNetHoursLoad mnetBIH = new MlpNetHoursLoad(nEpoch, nSamples, numInputs, numOutputs, CountriesEnum.CO_BIH, momentum, learningRate, batchSize, savePath, modelNamePart, earlyStoppingPart);
         mnetBIH.initNetwork();

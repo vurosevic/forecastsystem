@@ -107,7 +107,7 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
                     else if (h[j].equals("temperatureLow")) 
                          wfd.setTemperatureLow(Double.valueOf(daily.getDay(i).getByKey(h[j])));   
                     else if (h[j].equals("humidity")) 
-                         wfd.setHumidity(Double.valueOf(daily.getDay(i).getByKey(h[j])));              
+                         wfd.setHumidity(100*Double.valueOf(daily.getDay(i).getByKey(h[j])));              
                     else if (h[j].equals("windSpeed")) 
                          wfd.setWindSpeed(Double.valueOf(daily.getDay(i).getByKey(h[j])));    
                     else if (h[j].equals("apparentTemperatureLow")) 
@@ -174,7 +174,7 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
                         else if (h[j].equals("temperature"))                         
                             wfh.setTemperature(Double.valueOf(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("humidity"))                         
-                            wfh.setHumidity(Double.valueOf(hourly.getHour(i).getByKey(h[j])));     
+                            wfh.setHumidity(100*Double.valueOf(hourly.getHour(i).getByKey(h[j])));     
                         else if (h[j].equals("time")) 
                             wfh.setDayForecast(formatter.parse(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("windSpeed"))                         
