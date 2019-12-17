@@ -107,11 +107,7 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
                     else if (h[j].equals("temperatureLow")) 
                          wfd.setTemperatureLow(Double.valueOf(daily.getDay(i).getByKey(h[j])));   
                     else if (h[j].equals("humidity")) 
-<<<<<<< HEAD
-                         wfd.setHumidity(Double.valueOf(daily.getDay(i).getByKey(h[j]))*100);              
-=======
-                         wfd.setHumidity(100*Double.valueOf(daily.getDay(i).getByKey(h[j])));              
->>>>>>> branch 'master' of https://github.com/vurosevic/forecastsystem.git
+                         wfd.setHumidity(Double.valueOf(daily.getDay(i).getByKey(h[j]))*100);
                     else if (h[j].equals("windSpeed")) 
                          wfd.setWindSpeed(Double.valueOf(daily.getDay(i).getByKey(h[j])));    
                     else if (h[j].equals("apparentTemperatureLow")) 
@@ -177,12 +173,8 @@ public class WebscrapserviceForecastWeather implements CommandLineRunner {
                             wfh.setOzone(Double.valueOf(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("temperature"))                         
                             wfh.setTemperature(Double.valueOf(hourly.getHour(i).getByKey(h[j])));
-                        else if (h[j].equals("humidity"))                         
-<<<<<<< HEAD
-                            wfh.setHumidity(Double.valueOf(hourly.getHour(i).getByKey(h[j]))*100);     
-=======
-                            wfh.setHumidity(100*Double.valueOf(hourly.getHour(i).getByKey(h[j])));     
->>>>>>> branch 'master' of https://github.com/vurosevic/forecastsystem.git
+                        else if (h[j].equals("humidity"))
+                            wfh.setHumidity(Double.valueOf(hourly.getHour(i).getByKey(h[j]))*100); 
                         else if (h[j].equals("time")) 
                             wfh.setDayForecast(formatter.parse(hourly.getHour(i).getByKey(h[j])));
                         else if (h[j].equals("windSpeed"))                         
